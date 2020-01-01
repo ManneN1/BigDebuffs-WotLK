@@ -361,6 +361,7 @@ function BigDebuffs:AttachUnitFrame(unit)
 		frame.cooldownContainer:SetPoint("CENTER")
 		frame.cooldown:SetParent(frame.cooldownContainer)
 		frame.cooldown:SetAllPoints()
+		frame.cooldown:SetAlpha(0.9)
 		
 		frame:RegisterForDrag("LeftButton")
 		frame:SetMovable(true)
@@ -549,16 +550,12 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 		return
 	end
 		
-	local unit = self:GetUnitFromGUID(destGUID)
-	if not unit then return end
-	
-	
 	-- UnitChannelingInfo and event orders are not the same in WotLK as later expansions, UnitChannelingInfo will always return
 	-- nil @ the time of this event (independent of whether something was kicked or not).
 	-- We have to track UNIT_SPELLCAST_FAILED for spell failure of the target at the (approx.) same time as we interrupted
 	-- this "could" be wrong if the interrupt misses with a <0.01 sec failure window (which depending on server tickrate might
 	-- not even be possible)
-	if not (subEvent == "SPELL_CAST_SUCCESS" and self.interrupts[destGUID] and 
+	if subEvent == "SPELL_CAST_SUCCESS" and not (self.interrupts[destGUID] and 
 			self.interrupts[destGUID].failed and GetTime() - self.interrupts[destGUID].failed < 0.01) then
 		return
 	end
@@ -568,7 +565,7 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 	local duration = spelldata.interruptduration
    	if not duration then return end
 	
-	self:UpdateInterrupt(unit, destGUID, spellid, duration)
+	self:UpdateInterrupt(nil, destGUID, spellid, duration)
 end
 
 function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
@@ -587,11 +584,14 @@ function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
 		end
 	end
 	
+	if unit == nil then
+		unit = self:GetUnitFromGUID(guid)
+	end
+	
 	self:UNIT_AURA(nil, unit)
 	
 	-- clears the interrupt after end of duration
 	if duration then
-		print("Schedluing removal")
 		BigDebuffs:ScheduleTimer(self.UpdateInterrupt, duration+0.1, self, unit, guid, spellid)
 	end
 end
