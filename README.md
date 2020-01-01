@@ -6,7 +6,8 @@ BigDebuffs is an _extremely lightweight_ addon that hooks the Blizzard raid fram
 > The backport does not contain any raid frame modifications (number of debuffs shown / crowd control effects) since the
 > new raid frames do not exist in WotLK (they were implemented in Cataclysm).
 > The backport is essentially a much improved version of LoseControl.
-> The addon menu can only be accessed by /bd or /bigdebuffs.
+
+The addon menu can be accessed by typing /bd or /bigdebuffs.
 ---
 
 > **Developer's Note:** I'd like to thank the following people for their contributions to this release:
