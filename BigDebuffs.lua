@@ -1,5 +1,5 @@
 
--- BigDebuffs by Jordon (& improved / backported by Konjunktur)
+-- BigDebuffs by Jordon (& improved / backported by Konjunktur & Apparent)
 
 BigDebuffs = LibStub("AceAddon-3.0"):NewAddon("BigDebuffs", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0")
 
@@ -63,144 +63,138 @@ local defaults = {
 }
 
 BigDebuffs.Spells = {
-
-	["Dispersion"] = { type = "buffs_defensive", },  -- Dispersion
-	["Frenzied Regeneration"] = { type = "buffs_defensive", },  -- Frenzied Regeneration
-	["Hand of Protection"] = { type = "buffs_defensive", },  -- Blessing of Protection
-	["Spirit of Redemption"] = { type = "buffs_defensive", },  -- Spirit of Redemption
-	["Survival Instincts"] = { type = "buffs_defensive", },  -- Survival Instincts
-	["Roar of Sacrifice"] = { type = "buffs_defensive", },  -- Roar of Sacrifice (Hunter Pet Skill)
-	["Deterrence"] = { type = "buffs_defensive", },  -- Deterrence
-	["Evasion"] = { type = "buffs_defensive", },  -- Evasion
-	["Ardent Defender"] = { type = "buffs_defensive", },  -- Ardent Defender
-	["Barkskin"] = { type = "buffs_defensive", },  -- Barkskin
-	["Fear Ward"] = { type = "buffs_defensive", },  -- Fear Ward
-	["Last Stand"] = { type = "buffs_defensive", },  -- Last Stand
-	["Inner Focus"] = { type = "buffs_defensive", },  -- Inner Focus
-	["Pain Suppression"] = { type = "buffs_defensive", },  -- Pain Suppression
-	["Aura Mastery"] = { type = "buffs_defensive", },  -- Aura Mastery
-	["Icebound Fortitude"] = { type = "buffs_defensive", },  -- Icebound Fortitude
-	["Guardian Spirit"] = { type = "buffs_defensive", },  -- Guardian Spirit
-	["Feint"] = { type = "buffs_defensive", },  -- Feint
-	["Enraged Regeneration"] = { type = "buffs_defensive", },  -- Enraged Regeneration
-	["Divine Hymn"] = { type = "buffs_defensive", },  -- Divine Hymn
-	["Unbreakable Armor"] = { type = "buffs_defensive", },  -- Unbreakable Armor
-	["Shield Wall"] = { type = "buffs_defensive", },  -- Shield Wall
-	["Ice Barrier"] = { type = "buffs_defensive", },  -- Ice Barrier
-	["Feign Death"] = { type = "buffs_defensive", },  -- Feign Death
-	["Tranquility"] = { type = "buffs_defensive", },  -- Tranquility
-	["Divine Illumination"] = { type = "buffs_defensive"},  -- Divine Illumination
-	["Divine Protection"] = { type = "buffs_defensive", },  -- Divine Protection
-	["Hand of Sacrifice"] = { type = "buffs_defensive", },  -- Blessing of Sacrifice
-	["Hand of Freedom"] = { type = "buffs_defensive", },  -- Blessing of Freedom
-	["Vampiric Blood"] = { type = "buffs_defensive", },  -- Vampiric Blood
-
-	["Master's Call"] = { type = "buffs_defensive", },  -- Master's Call
-	["Divine Favor"] = { type = "buffs_defensive", },  -- Divine Favor
-	["Anti-Magic Zone"] = { type = "buffs_defensive", },  -- Anti-Magic Zone
-	["Hysteria"] = { type = "buffs_defensive", },  -- Hysteria
-
-	["Innervate"] = { type = "buffs_offensive", },  -- Innervate
-	["Tiger's Fury"] = { type = "buffs_offensive", },  -- Tiger's Fury
-	["Dancing Rune Weapon"] = { type = "buffs_offensive", },  -- Dancing Rune Weapon
-	["Icy Veins"] = { type = "buffs_offensive", },  -- Icy Veins
-	["Tree of Life"] = { type = "buffs_offensive", },  -- Tree of Life
-	["Avenging Wrath"] = { type = "buffs_offensive", },  -- Avenging Wrath (Protection/Retribution)
-	["Adrenaline Rush"] = { type = "buffs_offensive", },  -- Adrenaline Rush
-	["Combustion"] = { type = "buffs_offensive", },  -- Combustion
-	["Arcane Power"] = { type = "buffs_offensive", },  -- Arcane Power
-	["Elemental Mastery"] = { type = "buffs_offensive", },  -- Elemental Mastery
-	["Berserk"] = { type = "buffs_offensive", },  -- Berserk
-	["Recklessness"] = { type = "buffs_offensive", },  -- Battle Cry
-	["Bloodlust"] = { type = "buffs_offensive", },  -- Bloodlust
-		["Heroism"] = { type = "buffs_offensive"},  -- Heroism
-	["Killing Spree"] = { type = "buffs_offensive", },  -- Killing Spree
-	["Power Infusion"] = { type = "buffs_offensive", },  -- Power Infusion
-	["Presence of Mind"] = { type = "buffs_offensive", },  -- Presence of Mind
-	["Evocation"] = { type = "buffs_offensive", },  -- Evocation
-	["Invisibility"] = { type = "buffs_offensive", },  -- Invisibility
-	["Bestial Wrath"] = { type = "buffs_offensive", },  -- Bestial Wrath
-
-	["Drink"] = { type = "buffs_other", },  -- Drink
-		["Refreshment"] = { type = "buffs_other"},  -- Refreshment
-	["Dash"] = { type = "buffs_other", },  -- Dash
-	["Sprint"] = { type = "buffs_other", },  -- Sprint
-	["Viper Sting"] = { type = "buffs_other", },  -- Viper Sting
-	["Fel Domination"] = { type = "buffs_other", },  -- Fel Domination
-	["Berserker Rage"] = { type = "buffs_other", },  -- Berserker Rage
-	["Hypothermia"] = { type = "buffs_other", },  -- Hypothermia
-
-	["Shadowfury"] = { type = "cc", },  -- Shadowfury
-	["Gouge"] = { type = "cc", },  -- Gouge
-	["Disarm"] = { type = "cc", },  -- Disarm
-	["Dismantle"] = {type = "cc", }, -- Dismantle
-	["Hex"] = { type = "cc", },  -- Hex
-	["Polymorph"] = { type = "cc", },  -- Polymorph
-	["Intimidation"] = { type = "cc", },  -- Intimidation
-	["Arcane Torrent"] = { type = "cc", },  -- Arcane Torrent
-	["Maim"] = { type = "cc" },  -- Maim
-	["Blind"] = { type = "cc", },  -- Blind
-	["Bash"] = { type = "cc", },  -- Bash
-	["Kidney Shot"] = { type = "cc", },  -- Kidney Shot
-	["Sap"] = { type = "cc", },  -- Sap
-	["Hibernate"] = {type = "cc"}, -- Hibernate
-	["Wyvern Sting"] = { type = "cc", },  -- Wyvern Sting
-	["Strangulate"] = { type = "cc", },  -- Strangulate 
-	["Garrote - Silence"] = { type = "cc", },  -- Garrote - Silence
-	["Unstable Affliction (Silence)"] = { type = "cc", },  -- Unstable Affliction (Silence)
-	["Silencing Shot"] = { type = "cc", },
-	["Repentance"] = { type = "cc", },  -- Repentance
-	["Shockwave"] = { type = "cc", },  -- Shockwave
-	["Kidney Shot"] = { type = "cc", },  -- Kidney Shot
-	["Gnaw"] = { type = "cc", },  -- Gnaw
-	["Psychic Scream"] = { type = "cc", },  -- Psychic Scream
-	["Scatter Shot"] = { type = "cc", },  -- Scatter Shot
-	["Banish"] = { type = "cc", },  -- Banish
-	["Freezing Trap Effect"] = { type = "cc", },  -- Freezing Trap
-	["Inferno Effect"] = { type = "cc", },  -- Infernal Awakening
-	["Silence"] = { type = "cc", },  -- Silence
-	["Death Coil"] = { type = "cc", },  -- Mortal Coil
-	["Hammer of Justice"] = { type = "cc", },  -- Hammer of Justice
-	["War Stomp"] = { type = "cc", },  -- War Stomp
-	["Intimidating Shout"] = { type = "cc", },  -- Intimidating Shout
-	["Mind Control"] = { type = "cc", },  -- Mind Control
-	["Seduction"] = { type = "cc", },  -- Seduction
-	["Fear"] = { type = "cc", },  -- Fear
-	["Howl of Terror"] = { type = "cc", },  -- Howl of Terror
-	["Cheap Shot"] = { type = "cc", },  -- Cheap Shot
-	["Pounce"] = { type = "cc", },  -- Pounce
-	["Avenger's Shield"] = { type = "cc", },  -- Avenger's Shield
-	["Cyclone"] = { type = "cc" },  -- Cyclone
-	["Dragon's Breath"] = { type = "cc", },  -- Dragon's Breath
-	["Shackle Undead"] = { type = "cc", },  -- Shackle Undead
-	["Charge"] = { type = "cc", }, -- Charge
-	["Intercept"] = { type = "cc", }, -- Intercept
-	["Hungering Cold"] = { type = "cc", }, -- Hungering Cold
-
-	["Ice Block"] = { type = "immunities", },  -- Ice Block
-	["Bladestorm"] = { type = "immunities", },  -- Bladestorm (Arms)
-	["Divine Shield"] = { type = "immunities", },  -- Divine Shield
-
-	["Spell Reflection"] = { type = "immunities_spells", },  -- Spell Reflection
-	["Anti-Magic Shell"] = { type = "immunities_spells", },  -- Anti-Magic Shell
-	["Cloak of Shadows"] = { type = "immunities_spells", },  -- Cloak of Shadows
-	["Lichborne"] = { type = "immunities_spells", },  -- Lichborne
-
+	[47585] = { type = "buffs_defensive", },  -- Dispersion
+	[22842] = { type = "buffs_defensive", },  -- Frenzied Regeneration
+	[10278] = { type = "buffs_defensive", },  -- Hand of Protection
+		[5599] = { type = "buffs_defensive", },
+		[1022] = { type = "buffs_defensive", },
+	[20711] = { type = "buffs_defensive", },  -- Spirit of Redemption
+	[61336] = { type = "buffs_defensive", },  -- Survival Instincts
+	[53480] = { type = "buffs_defensive", },  -- Roar of Sacrifice (Hunter Pet Skill)
+	[19263] = { type = "buffs_defensive", },  -- Deterrence
+	[26669] = { type = "buffs_defensive", },  -- Evasion
+	[31852] = { type = "buffs_defensive", },  -- Ardent Defender
+	[22812] = { type = "buffs_defensive", },  -- Barkskin
+	[6346] = { type = "buffs_defensive", },  -- Fear Ward
+	[12975] = { type = "buffs_defensive", },  -- Last Stand
+	[14751] = { type = "buffs_defensive", },  -- Inner Focus
+	[33206] = { type = "buffs_defensive", },  -- Pain Suppression
+	[31821] = { type = "buffs_defensive", },  -- Aura Mastery
+	[66023] = { type = "buffs_defensive", },  -- Icebound Fortitude
+	[47788] = { type = "buffs_defensive", },  -- Guardian Spirit
+	[55694] = { type = "buffs_defensive", },  -- Enraged Regeneration
+	[64843] = { type = "buffs_defensive", },  -- Divine Hymn
+	[871] = { type = "buffs_defensive", },  -- Shield Wall
+	[43039] = { type = "buffs_defensive", },  -- Ice Barrier
+	[5384] = { type = "buffs_defensive", },  -- Feign Death
+	[498] = { type = "buffs_defensive", },  -- Divine Protection
+	[6940] = { type = "buffs_defensive", },  -- Hand of Sacrifice
+	[1044] = { type = "buffs_defensive", },  -- Hand of Freedom
+	[53271] = { type = "buffs_defensive", },  -- Master's Call
+	[51052] = { type = "buffs_defensive", },  -- Anti-Magic Zone // might not work because spell vs aura
+	[29166] = { type = "buffs_offensive", },  -- Innervate
+	[50213] = { type = "buffs_offensive", },  -- Tiger's Fury
+	[49028] = { type = "buffs_offensive", },  -- Dancing Rune Weapon // might not work - spell id vs aura
+	[12472] = { type = "buffs_offensive", },  -- Icy Veins
+	[31884] = { type = "buffs_offensive", },  -- Avenging Wrath
+	[13750] = { type = "buffs_offensive", },  -- Adrenaline Rush
+	[28682] = { type = "buffs_offensive", },  -- Combustion
+	[12042] = { type = "buffs_offensive", },  -- Arcane Power
+	[64701] = { type = "buffs_offensive", },  -- Elemental Mastery
+	[50334] = { type = "buffs_offensive", },  -- Berserk
+	[1719] = { type = "buffs_offensive", },  -- Recklessness
+	[2825] = { type = "buffs_offensive", },  -- Bloodlust
+		[32182] = { type = "buffs_offensive"},  -- Heroism
+	[51690] = { type = "buffs_offensive", },  -- Killing Spree
+	[10060] = { type = "buffs_offensive", },  -- Power Infusion
+	[12043] = { type = "buffs_offensive", },  -- Presence of Mind
+	[12051] = { type = "buffs_offensive", },  -- Evocation
+	[66] = { type = "buffs_offensive", },  -- Invisibility
+	[34471] = { type = "buffs_offensive", },  -- The Beast Within
+	[57073] = { type = "buffs_other", },  -- Drink
+	[33357] = { type = "buffs_other", },  -- Dash
+	[11305] = { type = "buffs_other", },  -- Sprint
+	[3034] = { type = "buffs_other", },  -- Viper Sting
+	[18708] = { type = "buffs_other", },  -- Fel Domination
+	[18499] = { type = "buffs_other", },  -- Berserker Rage
+	[47847] = { type = "cc", },  -- Shadowfury
+	[1776] = { type = "cc", },  -- Gouge
+	[676] = { type = "cc", },  -- Disarm
+	[51722] = {type = "cc", }, -- Dismantle
+	[51514] = { type = "cc", },  -- Hex
+	[118] = { type = "cc", },  -- Polymorph
+		[12826] = { type = "cc", },
+		[71319] = { type = "cc", },
+		[28271] = { type = "cc", },
+		[28272] = { type = "cc", },
+		[61305] = { type = "cc", },
+		[61721] = { type = "cc", },
+	[24394] = { type = "cc", },  -- Intimidation
+		[19577] = { type = "cc", },
+	[49802] = { type = "cc" },  -- Maim
+	[2094] = { type = "cc", },  -- Blind
+	[8983] = { type = "cc", },  -- Bash
+	[8643] = { type = "cc", },  -- Kidney Shot
+	[51724] = { type = "cc", },  -- Sap
+	[18658] = {type = "cc"}, -- Hibernate
+		[2637] = {type = "cc"},
+		[18657] = {type = "cc"},
+	[49012] = { type = "cc", },  -- Wyvern Sting
+	[49916] = { type = "cc", },  -- Strangulate 
+	[1330] = { type = "cc", },  -- Garrote - Silence
+	[31117] = { type = "cc", },  -- Unstable Affliction (Silence)
+	[34490] = { type = "cc", },
+	[20066] = { type = "cc", },  -- Repentance
+	[55918] = { type = "cc", },  -- Shockwave
+		[46968] = { type = "cc", },
+	[47481] = { type = "cc", },  -- Gnaw
+	[27610] = { type = "cc", },  -- Psychic Scream
+		[10890] = { type = "cc", },
+	[19503] = { type = "cc", },  -- Scatter Shot
+	[18647] = { type = "cc", },  -- Banish
+	[14309] = { type = "cc", },  -- Freezing Trap
+	[15487] = { type = "cc", },  -- Silence
+	[47860] = { type = "cc", },  -- Death Coil
+	[10308] = { type = "cc", },  -- Hammer of Justice
+	[20549] = { type = "cc", },  -- War Stomp
+	[5246] = { type = "cc", },  -- Intimidating Shout
+	[605] = { type = "cc", },  -- Mind Control
+	[6358] = { type = "cc", },  -- Seduction
+	[6215] = { type = "cc", },  -- Fear
+	[17928] = { type = "cc", },  -- Howl of Terror
+	[1833] = { type = "cc", },  -- Cheap Shot
+	[49803] = { type = "cc", },  -- Pounce
+	[33786] = { type = "cc" },  -- Cyclone
+	[69369] = { type = "buffs_offensive", }, -- Predator's Swiftness ---- problem here
+	[42950] = { type = "cc", },  -- Dragon's Breath
+	[10955] = { type = "cc", },  -- Shackle Undead
+	[7922] = { type = "cc", }, -- Charge
+		[65929] = { type = "cc", },
+	[25274] = { type = "cc", }, -- Intercept
+	[49203] = { type = "cc", }, -- Hungering Cold
+	[45438] = { type = "immunities", },  -- Ice Block
+	[65947] = { type = "immunities", },  -- Bladestorm
+		[63784] = { type = "immunities", },
+		[46924] = { type = "immunities", },
+	[63148] = { type = "immunities", },  -- Divine Shield
+	[23920] = { type = "immunities_spells", },  -- Spell Reflection
+		[59725] = { type = "immunities_spells", },
+	[48707] = { type = "immunities_spells", },  -- Anti-Magic Shell
+	[31224] = { type = "immunities_spells", },  -- Cloak of Shadows
+	[49039] = { type = "immunities_spells", },  -- Lichborne
+	[45334] = { type = "roots", },  -- Feral Charge Effect
+	[12494] = { type = "roots", },  -- Frostbite
+	[42917] = { type = "roots", },  -- Frost Nova
+	[44572] = { type = "cc" }, -- Deep Freeze
+	[53308] = { type = "roots", },  -- Entangling Roots
+	[8178] = { type = "immunities_spells", }, -- Grounding Totem Effect
 	["Pummel"] = { type = "interrupts", interruptduration = 4, },  -- Pummel (Warrior)
 	["Counterspell"] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
 	["Spell Lock"] = { type = "interrupts", interruptduration = 5, },  -- Spell Lock (Warlock)
 	["Mind Freeze"] = { type = "interrupts", interruptduration = 3, },  -- Mind Freeze (Death Knight)
-	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear
+	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear (Druid)
 	["Wind Shear"] = { type = "interrupts", interruptduration = 3, },  -- Wind Shear (Shaman)
 	["Kick"] = { type = "interrupts", interruptduration = 5, },  -- Kick (Rogue)
-
-	["Feral Charge Effect"] = { type = "roots", },  -- Wild Charge
-	["Frostbite"] = { type = "roots", },  -- Frostbite
-	["Frost Nova"] = { type = "roots", },  -- Frost Nova
-		["Freeze"] = { type = "roots", },  -- Freeze
-	["Earthgrab"] = { type = "roots", },  -- Earthgrab Totem
-	["Entangling Roots"] = { type = "roots", },  -- Entangling Roots
-	["Nature's Grasp"] = { type = "roots", }, -- Nature's Grasp
 }
 
 local units = {
