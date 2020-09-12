@@ -78,7 +78,6 @@ BigDebuffs.Spells = {
 	[61336] = { type = "buffs_defensive", },  -- Survival Instincts
 	[22812] = { type = "buffs_defensive", },  -- Barkskin
 	[29166] = { type = "buffs_offensive", },  -- Innervate
-	[50213] = { type = "buffs_offensive", },  -- Tiger's Fury
 	[50334] = { type = "buffs_offensive", },  -- Berserk
 	[33357] = { type = "buffs_other", },  -- Dash
 	[49802] = { type = "cc" },  -- Maim
