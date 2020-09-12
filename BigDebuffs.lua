@@ -79,6 +79,7 @@ BigDebuffs.Spells = {
 	[22812] = { type = "buffs_defensive", },  -- Barkskin
 	[29166] = { type = "buffs_offensive", },  -- Innervate
 	[50334] = { type = "buffs_offensive", },  -- Berserk
+	[69369] = { type = "buffs_offensive", }, -- Predator's Swiftness
 	[33357] = { type = "buffs_other", },  -- Dash
 	[49802] = { type = "cc" },  -- Maim
 	[8983] = { type = "cc", },  -- Bash
@@ -87,7 +88,6 @@ BigDebuffs.Spells = {
 		[18657] = {type = "cc"},
 	[49803] = { type = "cc", },  -- Pounce
 	[33786] = { type = "cc" },  -- Cyclone
-	[69369] = { type = "buffs_offensive", }, -- Predator's Swiftness
 	[45334] = { type = "roots", },  -- Feral Charge Effect
 	[53308] = { type = "roots", },  -- Entangling Roots
 	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear (Druid)
@@ -119,10 +119,10 @@ BigDebuffs.Spells = {
 		[61305] = { type = "cc", },
 		[61721] = { type = "cc", },
 	[42950] = { type = "cc", },  -- Dragon's Breath
+	[44572] = { type = "cc" }, -- Deep Freeze
 	[45438] = { type = "immunities", },  -- Ice Block
 	[12494] = { type = "roots", },  -- Frostbite
 	[42917] = { type = "roots", },  -- Frost Nova
-	[44572] = { type = "cc" }, -- Deep Freeze
 	["Counterspell"] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
 	-- Paladin
 	[10278] = { type = "buffs_defensive", },  -- Hand of Protection
@@ -141,11 +141,11 @@ BigDebuffs.Spells = {
 	[47585] = { type = "buffs_defensive", },  -- Dispersion
 	[20711] = { type = "buffs_defensive", },  -- Spirit of Redemption
 	[47788] = { type = "buffs_defensive", },  -- Guardian Spirit
-	[6346] = { type = "buffs_other", },  -- Fear Ward
 	[14751] = { type = "buffs_defensive", },  -- Inner Focus
 	[33206] = { type = "buffs_defensive", },  -- Pain Suppression
 	[64843] = { type = "buffs_defensive", },  -- Divine Hymn
 	[10060] = { type = "buffs_offensive", },  -- Power Infusion
+	[6346] = { type = "buffs_other", },  -- Fear Ward
 	[27610] = { type = "cc", },  -- Psychic Scream
 		[10890] = { type = "cc", },
 	[15487] = { type = "cc", },  -- Silence
@@ -153,10 +153,10 @@ BigDebuffs.Spells = {
 	[10955] = { type = "cc", },  -- Shackle Undead
 	-- Rogue
 	[51713] = { type = "buffs_offensive", }, -- Shadow Dance
-	[26669] = { type = "buffs_defensive", },  -- Evasion
 	[13750] = { type = "buffs_offensive", },  -- Adrenaline Rush
 	[51690] = { type = "buffs_offensive", },  -- Killing Spree
 	[11305] = { type = "buffs_other", },  -- Sprint
+	[26669] = { type = "buffs_defensive", },  -- Evasion
 	[1776] = { type = "cc", },  -- Gouge
 	[51722] = {type = "cc", }, -- Dismantle
 	[2094] = { type = "cc", },  -- Blind
