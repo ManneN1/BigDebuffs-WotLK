@@ -103,6 +103,7 @@ BigDebuffs.Spells = {
 	[49012] = { type = "cc", },  -- Wyvern Sting
 	[19503] = { type = "cc", },  -- Scatter Shot
 	[14309] = { type = "cc", },  -- Freezing Trap
+	[60210] = { type = "cc", }, -- Freezing Arrow Effect
 	-- Mage
 	[43039] = { type = "buffs_defensive", },  -- Ice Barrier
 	[12472] = { type = "buffs_offensive", },  -- Icy Veins
