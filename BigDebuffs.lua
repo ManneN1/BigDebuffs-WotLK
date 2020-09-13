@@ -175,6 +175,7 @@ BigDebuffs.Spells = {
 	[51514] = { type = "cc", },  -- Hex
 	[8178] = { type = "immunities_spells", }, -- Grounding Totem Effect
 	[63685] = { type = "roots", }, -- Freeze (Enhancement)
+	[64695] = { type = "roots", }, -- Earthgrab (Elemental)
 	[8145] = { type = "buffs_other", }, -- Tremor Totem
 	["Wind Shear"] = { type = "interrupts", interruptduration = 3, },  -- Wind Shear (Shaman)
 	-- Warlock
