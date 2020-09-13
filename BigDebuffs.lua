@@ -169,9 +169,13 @@ BigDebuffs.Spells = {
 	-- Shaman
 	[64701] = { type = "buffs_offensive", },  -- Elemental Mastery
 	[2825] = { type = "buffs_offensive", },  -- Bloodlust
-	[32182] = { type = "buffs_offensive"},  -- Heroism
+	[32182] = { type = "buffs_offensive", },  -- Heroism
+	[16191] = { type = "buffs_offensive", }, -- Mana Tide Totem
+	[30823] = { type = "buffs_defensive", }, -- Shamanistic Rage
 	[51514] = { type = "cc", },  -- Hex
 	[8178] = { type = "immunities_spells", }, -- Grounding Totem Effect
+	[63685] = { type = "roots", }, -- Freeze (Enhancement)
+	[8145] = { type = "buffs_other", }, -- Tremor Totem
 	["Wind Shear"] = { type = "interrupts", interruptduration = 3, },  -- Wind Shear (Shaman)
 	-- Warlock
 	[18708] = { type = "buffs_other", },  -- Fel Domination
