@@ -139,6 +139,7 @@ BigDebuffs.Spells = {
 	[31884] = { type = "buffs_offensive", },  -- Avenging Wrath
 	[20066] = { type = "cc", },  -- Repentance
 	[10308] = { type = "cc", },  -- Hammer of Justice
+	[63529] = { type = "cc", }, -- Silenced - Shield of the Templar
 	[63148] = { type = "immunities", },  -- Divine Shield
 	-- Priest
 	[47585] = { type = "buffs_defensive", },  -- Dispersion
