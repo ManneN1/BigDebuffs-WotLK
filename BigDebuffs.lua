@@ -96,6 +96,7 @@ BigDebuffs.Spells = {
 	[19263] = { type = "buffs_defensive", },  -- Deterrence
 	[5384] = { type = "buffs_defensive", },  -- Feign Death
 	[53271] = { type = "buffs_defensive", },  -- Master's Call
+	[53476] = { type = "buffs_defensive", }, -- Intervene (Pet)
 	[34471] = { type = "buffs_offensive", },  -- The Beast Within
 	[3034] = { type = "buffs_other", },  -- Viper Sting
 	[24394] = { type = "cc", },  -- Intimidation
@@ -197,7 +198,7 @@ BigDebuffs.Spells = {
 	[12975] = { type = "buffs_defensive", },  -- Last Stand
 	[55694] = { type = "buffs_defensive", },  -- Enraged Regeneration
 	[871] = { type = "buffs_defensive", },  -- Shield Wall
-	[3411] = { type = "buffs_offensive", },  -- Intervene
+	[3411] = { type = "buffs_defensive", },  -- Intervene
 	[1719] = { type = "buffs_offensive", },  -- Recklessness
 	[18499] = { type = "buffs_other", },  -- Berserker Rage
 	[676] = { type = "cc", },  -- Disarm
@@ -505,10 +506,7 @@ function BigDebuffs:OnEnable()
 		end, true)
 	end
 
-	self:InsertTestDebuff(8122) 	-- Psychic Scream
-	self:InsertTestDebuff(408) 		-- Kidney Shot
-	self:InsertTestDebuff(30108) 	-- Unstable Affliction
-	self:InsertTestDebuff(339) 		-- Entangling Roots
+	self:InsertTestDebuff(69369) 	-- Predator's Swiftness
 end
 
 function BigDebuffs:PLAYER_ENTERING_WORLD()
