@@ -178,6 +178,7 @@ BigDebuffs.Spells = {
 	[16191] = { type = "buffs_offensive", }, -- Mana Tide Totem
 	[30823] = { type = "buffs_defensive", }, -- Shamanistic Rage
 	[51514] = { type = "cc", },  -- Hex
+	[39796] = { type = "cc", }, -- Stoneclaw Stun
 	[8178] = { type = "immunities_spells", }, -- Grounding Totem Effect
 	[63685] = { type = "roots", }, -- Freeze (Enhancement)
 	[64695] = { type = "roots", }, -- Earthgrab (Elemental)
