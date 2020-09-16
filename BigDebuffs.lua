@@ -208,7 +208,7 @@ BigDebuffs.Spells = {
 	[5246] = { type = "cc", },  -- Intimidating Shout
 	[7922] = { type = "cc", }, -- Charge
 		[65929] = { type = "cc", },
-	[25274] = { type = "cc", }, -- Intercept
+	[30197] = { type = "cc", }, -- Intercept
 	[65947] = { type = "immunities", },  -- Bladestorm
 		[63784] = { type = "immunities", },
 		[46924] = { type = "immunities", },
