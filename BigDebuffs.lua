@@ -138,6 +138,7 @@ BigDebuffs.Spells = {
 	[498] = { type = "buffs_defensive", },  -- Divine Protection
 	[6940] = { type = "buffs_defensive", },  -- Hand of Sacrifice
 	[1044] = { type = "buffs_defensive", },  -- Hand of Freedom
+	[64205] = { type = "buffs_defensive", }, -- Divine Sacrifice
 	[31884] = { type = "buffs_offensive", },  -- Avenging Wrath
 	[20066] = { type = "cc", },  -- Repentance
 	[10308] = { type = "cc", },  -- Hammer of Justice
