@@ -123,7 +123,8 @@ BigDebuffs.Spells = {
 		[61305] = { type = "cc", },
 		[61721] = { type = "cc", },
 	[42950] = { type = "cc", },  -- Dragon's Breath
-	[44572] = { type = "cc" }, -- Deep Freeze
+	[44572] = { type = "cc", }, -- Deep Freeze
+	[64343] = { type = "cc", }, -- Impact
 	[45438] = { type = "immunities", },  -- Ice Block
 	[12494] = { type = "roots", },  -- Frostbite
 	[42917] = { type = "roots", },  -- Frost Nova
