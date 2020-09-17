@@ -426,7 +426,7 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetParent(frame.anchor:GetParent())
 			frame:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
 			frame.cooldownContainer:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel()-1)
-			frame.cooldownContainer:SetSize(frame.anchor:GetWidth()-10, frame.anchor:GetHeight()-8)
+			frame.cooldownContainer:SetSize(frame.anchor:GetWidth()-12, frame.anchor:GetHeight()-10)
 			frame.anchor:SetDrawLayer("BACKGROUND")
 		else
 			frame:SetParent(frame.parent and frame.parent or frame.anchor)
@@ -719,8 +719,6 @@ function BigDebuffs:UNIT_AURA(event, unit)
 	end
 	
 	if debuff then
-		if duration < 1 then duration = 1 end -- auras like Solar Beam don't have a duration
-
 		if frame.current ~= icon then
 			if frame.blizzard then
 				-- Blizzard Frame
@@ -734,10 +732,12 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			end
 		end
 		
-		frame.cooldown:SetCooldown(expires - duration, duration)
-		frame.cooldownContainer:Show()
-		frame:Show()
+		if duration > 1 then
+			frame.cooldown:SetCooldown(expires - duration, duration)
+			frame.cooldownContainer:Show()
+		end
 
+		frame:Show()
 		frame.current = icon
 	else
 		-- Adapt
