@@ -76,6 +76,7 @@ BigDebuffs.Spells = {
 	["Mind Freeze"] = { type = "interrupts", interruptduration = 3, },  -- Mind Freeze (Death Knight)
 	-- Druid
 	[22842] = { type = "buffs_defensive", },  -- Frenzied Regeneration
+	[17116] = { type = "buffs_defensive", }, -- Nature's Swiftness
 	[61336] = { type = "buffs_defensive", },  -- Survival Instincts
 	[22812] = { type = "buffs_defensive", },  -- Barkskin
 	[29166] = { type = "buffs_offensive", },  -- Innervate
@@ -203,6 +204,7 @@ BigDebuffs.Spells = {
 	[32182] = { type = "buffs_offensive", },  -- Heroism
 	[16191] = { type = "buffs_offensive", }, -- Mana Tide Totem
 	[30823] = { type = "buffs_defensive", }, -- Shamanistic Rage
+	[16188] = { type = "buffs_defensive", }, -- Nature's Swiftness
 	[51514] = { type = "cc", },  -- Hex
 	[39796] = { type = "cc", }, -- Stoneclaw Stun
 	[8178] = { type = "immunities_spells", }, -- Grounding Totem Effect
