@@ -95,13 +95,14 @@ BigDebuffs.Spells = {
 	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear (Druid)
 	-- Hunter
 	[53480] = { type = "buffs_defensive", },  -- Roar of Sacrifice (Hunter Pet Skill)
-	[19263] = { type = "buffs_defensive", },  -- Deterrence
 	[5384] = { type = "buffs_defensive", },  -- Feign Death
 	[53271] = { type = "buffs_defensive", },  -- Master's Call
 	[53476] = { type = "buffs_defensive", }, -- Intervene (Pet)
 	[1742] = { type = "buffs_defensive", }, -- Cower (Pet)
 	[26064] = { type = "buffs_defensive", }, -- Shell Shield (Pet)
-	[34471] = { type = "buffs_offensive", },  -- The Beast Within
+	[34471] = { type = "immunities", },  -- The Beast Within
+	[19263] = { type = "immunities", },  -- Deterrence
+	[19574] = { type = "immunities", }, -- Bestial Wrath (Pet)
 	[3034] = { type = "buffs_other", },  -- Viper Sting
 	[24394] = { type = "cc", },  -- Intimidation
 		[19577] = { type = "cc", },
