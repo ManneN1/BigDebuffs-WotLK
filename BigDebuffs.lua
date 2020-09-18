@@ -65,7 +65,7 @@ local defaults = {
 BigDebuffs.Spells = {
 	-- Death Knight
 	[48792] = { type = "buffs_defensive", },  -- Icebound Fortitude
-	[51052] = { type = "buffs_defensive", },  -- Anti-Magic Zone // might not work because spell vs aura
+	[50461] = { type = "buffs_defensive", },  -- Anti-Magic Zone
 	[49028] = { type = "buffs_offensive", },  -- Dancing Rune Weapon // might not work - spell id vs aura
 	[49916] = { type = "cc", },  -- Strangulate
 	[47481] = { type = "cc", },  -- Gnaw
