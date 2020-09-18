@@ -184,6 +184,7 @@ BigDebuffs.Spells = {
 	[51713] = { type = "buffs_offensive", }, -- Shadow Dance
 	[13750] = { type = "buffs_offensive", },  -- Adrenaline Rush
 	[51690] = { type = "buffs_offensive", },  -- Killing Spree
+	[14177] = { type = "buffs_offensive", }, -- Cold Blood
 	[11305] = { type = "buffs_other", },  -- Sprint
 	[26669] = { type = "buffs_defensive", },  -- Evasion
 	[1776] = { type = "cc", },  -- Gouge
