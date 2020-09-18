@@ -226,6 +226,7 @@ BigDebuffs.Spells = {
 	[64849] = { type = "buffs_offensive", }, -- Unrelenting Assault (1/2)
 	[65925] = { type = "buffs_offensive", }, -- Unrelenting Assault (2/2)
 	[1719] = { type = "buffs_offensive", },  -- Recklessness
+	[12292] = { type = "buffs_offensive", }, -- Death Wish
 	[18499] = { type = "buffs_other", },  -- Berserker Rage
 	[676] = { type = "cc", },  -- Disarm
 	[55918] = { type = "cc", },  -- Shockwave
