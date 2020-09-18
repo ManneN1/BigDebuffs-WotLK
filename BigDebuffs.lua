@@ -225,7 +225,8 @@ BigDebuffs.Spells = {
 		[46924] = { type = "immunities", },
 	[23920] = { type = "immunities_spells", },  -- Spell Reflection
 		[59725] = { type = "immunities_spells", },
-	["Pummel"] = { type = "interrupts", interruptduration = 4, },  -- Pummel (Warrior)
+	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
+	[72] = { type = "interrupts", interruptduration = 6, }, -- Shield Bash
 	-- Misc
 	[43183] = { type = "buffs_other", },  -- Drink
 	[20549] = { type = "cc", },  -- War Stomp
