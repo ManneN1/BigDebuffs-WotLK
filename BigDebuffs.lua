@@ -200,7 +200,8 @@ BigDebuffs.Spells = {
 	[6358] = { type = "cc", },  -- Seduction
 	[6215] = { type = "cc", },  -- Fear
 	[17928] = { type = "cc", },  -- Howl of Terror
-	["Spell Lock"] = { type = "interrupts", interruptduration = 5, },  -- Spell Lock (Warlock)
+	[24259] = { type = "cc", }, -- Spell Lock (Silence)
+	[19647] = { type = "interrupts", interruptduration = 6, },  -- Spell Lock (Interrupt)
 	-- Warrior
 	[12975] = { type = "buffs_defensive", },  -- Last Stand
 	[55694] = { type = "buffs_defensive", },  -- Enraged Regeneration
