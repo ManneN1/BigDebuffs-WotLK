@@ -259,7 +259,8 @@ BigDebuffs.Spells = {
 	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
 	[72] = { type = "interrupts", interruptduration = 6, }, -- Shield Bash
 	-- Misc
-	[43183] = { type = "buffs_other", },  -- Drink
+	[43183] = { type = "buffs_other", },  -- Drink (Arena/Lvl 80 Water)
+		[57073] = { type = "buffs_other" }, -- (Mage Water)
 	[20549] = { type = "cc", },  -- War Stomp
 	[28730] = { type = "cc", }, -- Arcane Torrent (Mana)
 	[25046] = { type = "cc", }, -- Arcane Torrent (Energy)
