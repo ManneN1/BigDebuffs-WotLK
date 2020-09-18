@@ -80,6 +80,7 @@ BigDebuffs.Spells = {
 	[29166] = { type = "buffs_offensive", },  -- Innervate
 	[50334] = { type = "buffs_offensive", },  -- Berserk
 	[69369] = { type = "buffs_offensive", }, -- Predator's Swiftness
+	[53201] = { type = "buffs_offensive", }, -- Starfall
 	[33357] = { type = "buffs_other", },  -- Dash
 	[49802] = { type = "cc" },  -- Maim
 	[8983] = { type = "cc", },  -- Bash
