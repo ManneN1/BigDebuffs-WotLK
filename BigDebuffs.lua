@@ -772,6 +772,9 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		if duration > 1 then
 			frame.cooldown:SetCooldown(expires - duration, duration)
 			frame.cooldownContainer:Show()
+		else 
+			frame.cooldown:SetCooldown(0, 0)
+			frame.cooldownContainer:Hide()
 		end
 
 		frame:Show()
