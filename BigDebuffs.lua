@@ -163,6 +163,7 @@ BigDebuffs.Spells = {
 	[63529] = { type = "cc", }, -- Silenced - Shield of the Templar
 	[10326] = { type = "cc", }, -- Turn Evil
 	[48817] = { type = "cc", }, -- Holy Wrath
+	[20170] = { type = "cc", }, -- Seal of Justice Stun
 	[642] = { type = "immunities", },  -- Divine Shield
 	-- Priest
 	[47585] = { type = "buffs_defensive", },  -- Dispersion
