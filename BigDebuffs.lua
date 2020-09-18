@@ -162,6 +162,7 @@ BigDebuffs.Spells = {
 	[14751] = { type = "buffs_defensive", },  -- Inner Focus
 	[33206] = { type = "buffs_defensive", },  -- Pain Suppression
 	[64843] = { type = "buffs_defensive", },  -- Divine Hymn
+	[64901] = { type = "buffs_defensive", }, -- Hymn of Hope
 	[10060] = { type = "buffs_offensive", },  -- Power Infusion
 	[6346] = { type = "buffs_other", },  -- Fear Ward
 	[27610] = { type = "cc", },  -- Psychic Scream
