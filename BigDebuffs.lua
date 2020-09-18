@@ -176,6 +176,8 @@ BigDebuffs.Spells = {
 	[64901] = { type = "buffs_defensive", }, -- Hymn of Hope
 	[10060] = { type = "buffs_offensive", },  -- Power Infusion
 	[6346] = { type = "buffs_other", },  -- Fear Ward
+	[64044] = { type = "cc", }, -- Psychic Horror (Horrify)
+	[64058] = { type = "cc", }, -- Psychic Horror (Disarm)
 	[27610] = { type = "cc", },  -- Psychic Scream
 		[10890] = { type = "cc", },
 	[15487] = { type = "cc", },  -- Silence
