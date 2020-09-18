@@ -125,10 +125,11 @@ BigDebuffs.Spells = {
 	[42950] = { type = "cc", },  -- Dragon's Breath
 	[44572] = { type = "cc", }, -- Deep Freeze
 	[12355] = { type = "cc", }, -- Impact
+	[55021] = { type = "cc", }, -- Improved Counterspell
 	[45438] = { type = "immunities", },  -- Ice Block
 	[12494] = { type = "roots", },  -- Frostbite
 	[42917] = { type = "roots", },  -- Frost Nova
-	["Counterspell"] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
+	[2139] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
 	-- Paladin
 	[10278] = { type = "buffs_defensive", },  -- Hand of Protection
 		[5599] = { type = "buffs_defensive", },
