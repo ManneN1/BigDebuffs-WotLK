@@ -222,6 +222,9 @@ BigDebuffs.Spells = {
 	[3411] = { type = "buffs_defensive", },  -- Intervene
 	[2565] = { type = "buffs_defensive", }, -- Shield Block
 	[20230] = { type = "buffs_defensive", }, -- Retaliation
+	[60503] = { type = "buffs_offensive", }, -- Taste for Blood
+	[64849] = { type = "buffs_offensive", }, -- Unrelenting Assault (1/2)
+	[65925] = { type = "buffs_offensive", }, -- Unrelenting Assault (2/2)
 	[1719] = { type = "buffs_offensive", },  -- Recklessness
 	[18499] = { type = "buffs_other", },  -- Berserker Rage
 	[676] = { type = "cc", },  -- Disarm
