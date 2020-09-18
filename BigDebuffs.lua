@@ -141,6 +141,7 @@ BigDebuffs.Spells = {
 	[44572] = { type = "cc", }, -- Deep Freeze
 	[12355] = { type = "cc", }, -- Impact
 	[55021] = { type = "cc", }, -- Improved Counterspell
+	[64346] = { type = "cc", }, -- Fiery Payback (Fire Mage Disarm)
 	[45438] = { type = "immunities", },  -- Ice Block
 	[12494] = { type = "roots", },  -- Frostbite
 	[42917] = { type = "roots", },  -- Frost Nova
