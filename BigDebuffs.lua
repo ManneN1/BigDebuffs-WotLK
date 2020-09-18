@@ -110,6 +110,7 @@ BigDebuffs.Spells = {
 	[19503] = { type = "cc", },  -- Scatter Shot
 	[14309] = { type = "cc", },  -- Freezing Trap
 	[60210] = { type = "cc", }, -- Freezing Arrow Effect
+	[14327] = { type = "cc", }, -- Scare Beast
 	[53359] = { type = "cc", }, -- Chimera Shot - Scorpid (Disarm)
 	[53562] = { type = "cc", }, -- Ravage (Pet)
 	[53543] = { type = "cc", }, -- Snatch (Pet Disarm)
