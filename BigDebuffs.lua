@@ -209,6 +209,7 @@ BigDebuffs.Spells = {
 	[6215] = { type = "cc", },  -- Fear
 	[17928] = { type = "cc", },  -- Howl of Terror
 	[24259] = { type = "cc", }, -- Spell Lock (Silence)
+	[47995] = { type = "cc", }, -- Intercept (Felguard)
 	[19647] = { type = "interrupts", interruptduration = 6, },  -- Spell Lock (Interrupt)
 	-- Warrior
 	[12975] = { type = "buffs_defensive", },  -- Last Stand
