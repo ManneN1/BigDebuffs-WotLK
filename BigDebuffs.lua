@@ -87,7 +87,7 @@ BigDebuffs.Spells = {
 		[2637] = {type = "cc"},
 		[18657] = {type = "cc"},
 	[49803] = { type = "cc", },  -- Pounce
-	[33786] = { type = "cc" },  -- Cyclone
+	[33786] = { type = "immunities" },  -- Cyclone
 	[45334] = { type = "roots", },  -- Feral Charge Effect
 	[53308] = { type = "roots", },  -- Entangling Roots
 	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear (Druid)
