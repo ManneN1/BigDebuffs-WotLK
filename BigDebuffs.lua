@@ -174,6 +174,7 @@ BigDebuffs.Spells = {
 	[51724] = { type = "cc", },  -- Sap
 	[1330] = { type = "cc", },  -- Garrote - Silence
 	[1833] = { type = "cc", },  -- Cheap Shot
+	[18425] = { type = "cc", }, -- Silence (Improved Kick)
 	[31224] = { type = "immunities_spells", },  -- Cloak of Shadows
 	["Kick"] = { type = "interrupts", interruptduration = 5, },  -- Kick (Rogue)
 	-- Shaman
