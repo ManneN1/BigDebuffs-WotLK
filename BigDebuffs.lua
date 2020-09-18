@@ -201,6 +201,7 @@ BigDebuffs.Spells = {
 	-- Warlock
 	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
 	[18708] = { type = "buffs_other", },  -- Fel Domination
+	[60995] = { type = "cc", }, -- Demon Charge (Metamorphosis)
 	[47847] = { type = "cc", },  -- Shadowfury
 	[31117] = { type = "cc", },  -- Unstable Affliction (Silence)
 		[34490] = { type = "cc", },
