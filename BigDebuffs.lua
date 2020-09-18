@@ -199,6 +199,7 @@ BigDebuffs.Spells = {
 	[8145] = { type = "buffs_other", }, -- Tremor Totem
 	["Wind Shear"] = { type = "interrupts", interruptduration = 2, },  -- Wind Shear (Shaman)
 	-- Warlock
+	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
 	[18708] = { type = "buffs_other", },  -- Fel Domination
 	[47847] = { type = "cc", },  -- Shadowfury
 	[31117] = { type = "cc", },  -- Unstable Affliction (Silence)
