@@ -113,6 +113,7 @@ BigDebuffs.Spells = {
 	[53543] = { type = "cc", }, -- Snatch (Pet Disarm)
 	[53548] = { type = "roots", }, -- Pin (Pet)
 	[4167] = { type = "roots", }, -- Web (Pet)
+	[26090] = { type = "interrupts", interruptduration = 2, }, -- Pummel (Pet)
 	-- Mage
 	[43039] = { type = "buffs_defensive", },  -- Ice Barrier
 	[12472] = { type = "buffs_offensive", },  -- Icy Veins
