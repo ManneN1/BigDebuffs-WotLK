@@ -94,6 +94,7 @@ BigDebuffs.Spells = {
 	[53308] = { type = "roots", },  -- Entangling Roots
 	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear (Druid)
 	-- Hunter
+	[3045] = { type = "buffs_offensive", }, -- Rapid Fire
 	[53480] = { type = "buffs_defensive", },  -- Roar of Sacrifice (Hunter Pet Skill)
 	[5384] = { type = "buffs_defensive", },  -- Feign Death
 	[53271] = { type = "buffs_defensive", },  -- Master's Call
