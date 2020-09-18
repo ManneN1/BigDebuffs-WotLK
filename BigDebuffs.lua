@@ -229,6 +229,7 @@ BigDebuffs.Spells = {
 	[12292] = { type = "buffs_offensive", }, -- Death Wish
 	[18499] = { type = "buffs_other", },  -- Berserker Rage
 	[12809] = { type = "cc", }, -- Concussion Blow
+	[12798] = { type = "cc", }, -- Revenge Stun
 	[676] = { type = "cc", },  -- Disarm
 	[55918] = { type = "cc", },  -- Shockwave
 		[46968] = { type = "cc", },
