@@ -109,6 +109,7 @@ BigDebuffs.Spells = {
 	[53562] = { type = "cc", }, -- Ravage (Pet)
 	[53543] = { type = "cc", }, -- Snatch (Pet Disarm)
 	[53548] = { type = "roots", }, -- Pin (Pet)
+	[4167] = { type = "roots", }, -- Web (Pet)
 	-- Mage
 	[43039] = { type = "buffs_defensive", },  -- Ice Barrier
 	[12472] = { type = "buffs_offensive", },  -- Icy Veins
