@@ -115,6 +115,7 @@ BigDebuffs.Spells = {
 	[53359] = { type = "cc", }, -- Chimera Shot - Scorpid (Disarm)
 	[53562] = { type = "cc", }, -- Ravage (Pet)
 	[53543] = { type = "cc", }, -- Snatch (Pet Disarm)
+	[48999] = { type = "roots", }, -- Counterattack
 	[53548] = { type = "roots", }, -- Pin (Pet)
 	[4167] = { type = "roots", }, -- Web (Pet)
 	[26090] = { type = "interrupts", interruptduration = 2, }, -- Pummel (Pet)
