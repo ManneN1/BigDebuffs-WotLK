@@ -116,6 +116,9 @@ BigDebuffs.Spells = {
 	[53562] = { type = "cc", }, -- Ravage (Pet)
 	[53543] = { type = "cc", }, -- Snatch (Pet Disarm)
 	[48999] = { type = "roots", }, -- Counterattack
+	[19185] = { type = "roots", }, -- Entrapment
+		[64803] = { type = "roots", },
+		[64804] = { type = "roots", },
 	[53548] = { type = "roots", }, -- Pin (Pet)
 	[4167] = { type = "roots", }, -- Web (Pet)
 	[26090] = { type = "interrupts", interruptduration = 2, }, -- Pummel (Pet)
