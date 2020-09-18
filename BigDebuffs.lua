@@ -83,6 +83,7 @@ BigDebuffs.Spells = {
 	[50334] = { type = "buffs_offensive", },  -- Berserk
 	[69369] = { type = "buffs_offensive", }, -- Predator's Swiftness
 	[53201] = { type = "buffs_offensive", }, -- Starfall
+	[53312] = { type = "buffs_other", }, -- Nature's Grasp
 	[33357] = { type = "buffs_other", },  -- Dash
 	[49802] = { type = "cc" },  -- Maim
 	[8983] = { type = "cc", },  -- Bash
@@ -106,8 +107,8 @@ BigDebuffs.Spells = {
 	[19263] = { type = "immunities", },  -- Deterrence
 	[19574] = { type = "immunities", }, -- Bestial Wrath (Pet)
 	[3034] = { type = "buffs_other", },  -- Viper Sting
-	[24394] = { type = "cc", },  -- Intimidation
-		[19577] = { type = "cc", },
+	[24394] = { type = "cc", },  -- Intimidation (Stun)
+		[19577] = { type = "buffs_offensive", }, -- Intimidation (Pet Buff)
 	[49012] = { type = "cc", },  -- Wyvern Sting
 	[19503] = { type = "cc", },  -- Scatter Shot
 	[14309] = { type = "cc", },  -- Freezing Trap
@@ -178,8 +179,7 @@ BigDebuffs.Spells = {
 	[6346] = { type = "buffs_other", },  -- Fear Ward
 	[64044] = { type = "cc", }, -- Psychic Horror (Horrify)
 	[64058] = { type = "cc", }, -- Psychic Horror (Disarm)
-	[27610] = { type = "cc", },  -- Psychic Scream
-		[10890] = { type = "cc", },
+	[10890] = { type = "cc", },  -- Psychic Scream
 	[15487] = { type = "cc", },  -- Silence
 	[605] = { type = "cc", },  -- Mind Control
 	[10955] = { type = "cc", },  -- Shackle Undead
@@ -220,7 +220,6 @@ BigDebuffs.Spells = {
 	[60995] = { type = "cc", }, -- Demon Charge (Metamorphosis)
 	[47847] = { type = "cc", },  -- Shadowfury
 	[31117] = { type = "cc", },  -- Unstable Affliction (Silence)
-		[34490] = { type = "cc", },
 	[18647] = { type = "cc", },  -- Banish
 	[47860] = { type = "cc", },  -- Death Coil
 	[6358] = { type = "cc", },  -- Seduction
@@ -245,17 +244,12 @@ BigDebuffs.Spells = {
 	[12809] = { type = "cc", }, -- Concussion Blow
 	[12798] = { type = "cc", }, -- Revenge Stun
 	[676] = { type = "cc", },  -- Disarm
-	[55918] = { type = "cc", },  -- Shockwave
-		[46968] = { type = "cc", },
+	[46968] = { type = "cc", },  -- Shockwave
 	[5246] = { type = "cc", },  -- Intimidating Shout
 	[7922] = { type = "cc", }, -- Charge
-		[65929] = { type = "cc", },
 	[30197] = { type = "cc", }, -- Intercept
-	[65947] = { type = "immunities", },  -- Bladestorm
-		[63784] = { type = "immunities", },
-		[46924] = { type = "immunities", },
+	[46924] = { type = "immunities", },  -- Bladestorm
 	[23920] = { type = "immunities_spells", },  -- Spell Reflection
-		[59725] = { type = "immunities_spells", },
 	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
 	[72] = { type = "interrupts", interruptduration = 6, }, -- Shield Bash
 	-- Misc
