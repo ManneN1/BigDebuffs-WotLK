@@ -66,6 +66,7 @@ BigDebuffs.Spells = {
 	-- Death Knight
 	[48792] = { type = "buffs_defensive", },  -- Icebound Fortitude
 	[50461] = { type = "buffs_defensive", },  -- Anti-Magic Zone
+	[47484] = { type = "buffs_defensive", }, -- Huddle (Ghoul)
 	[49028] = { type = "buffs_offensive", },  -- Dancing Rune Weapon // might not work - spell id vs aura
 	[49916] = { type = "cc", },  -- Strangulate
 	[47481] = { type = "cc", },  -- Gnaw
