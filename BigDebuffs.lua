@@ -73,7 +73,7 @@ BigDebuffs.Spells = {
 	[49203] = { type = "cc", }, -- Hungering Cold
 	[48707] = { type = "immunities_spells", },  -- Anti-Magic Shell
 	[49039] = { type = "immunities_spells", },  -- Lichborne
-	["Mind Freeze"] = { type = "interrupts", interruptduration = 3, },  -- Mind Freeze (Death Knight)
+	[53550] = { type = "interrupts", interruptduration = 4, },  -- Mind Freeze
 	-- Druid
 	[22842] = { type = "buffs_defensive", },  -- Frenzied Regeneration
 	[17116] = { type = "buffs_defensive", }, -- Nature's Swiftness
@@ -91,9 +91,9 @@ BigDebuffs.Spells = {
 		[18657] = {type = "cc"},
 	[49803] = { type = "cc", },  -- Pounce
 	[33786] = { type = "immunities" },  -- Cyclone
-	[45334] = { type = "roots", },  -- Feral Charge Effect
+	[45334] = { type = "roots", },  -- Feral Charge Effect (Immobilize)
 	[53308] = { type = "roots", },  -- Entangling Roots
-	["Feral Charge - Bear"] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge - Bear (Druid)
+	[19675] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge Effect (Interrupt)
 	-- Hunter
 	[3045] = { type = "buffs_offensive", }, -- Rapid Fire
 	[53480] = { type = "buffs_defensive", },  -- Roar of Sacrifice (Hunter Pet Skill)
@@ -199,7 +199,7 @@ BigDebuffs.Spells = {
 	[1833] = { type = "cc", },  -- Cheap Shot
 	[18425] = { type = "cc", }, -- Silence (Improved Kick)
 	[31224] = { type = "immunities_spells", },  -- Cloak of Shadows
-	["Kick"] = { type = "interrupts", interruptduration = 5, },  -- Kick (Rogue)
+	[1766] = { type = "interrupts", interruptduration = 5, },  -- Kick
 	-- Shaman
 	[64701] = { type = "buffs_offensive", },  -- Elemental Mastery
 	[2825] = { type = "buffs_offensive", },  -- Bloodlust
@@ -213,7 +213,7 @@ BigDebuffs.Spells = {
 	[63685] = { type = "roots", }, -- Freeze (Enhancement)
 	[64695] = { type = "roots", }, -- Earthgrab (Elemental)
 	[8145] = { type = "buffs_other", }, -- Tremor Totem
-	["Wind Shear"] = { type = "interrupts", interruptduration = 2, },  -- Wind Shear (Shaman)
+	[57994] = { type = "interrupts", interruptduration = 2, },  -- Wind Shear
 	-- Warlock
 	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
 	[18708] = { type = "buffs_other", },  -- Fel Domination
