@@ -131,7 +131,7 @@ function BigDebuffs:SetupOptions()
 			desc = {
 				order = 2,
 				type = "description",
-				name = "|cffffd700 "..L["Author"].."|r Jordon (improved by Konjunktur) \n",
+				name = "|cffffd700 "..L["Author"].."|r Jordon (WoTLK backport by Konjunktur & Apparent) \n",
 				cmdHidden = true
 			},
 			test = {

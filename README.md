@@ -4,6 +4,12 @@ BigDebuffs is an _extremely lightweight_ addon that hooks the Blizzard raid fram
 
 The addon menu can be accessed by typing /bd or /bigdebuffs.
 
+### Downloading
+
+To download this addon, hit the **green "Code" button** and then select `Download ZIP`.
+
+Once the addon is finished downloading, extract the contents to your `Interface/AddOns` directory and **importantly** rename the folder from `BigDebuffs-WoTLK-master` to `BigDebuffs`.
+
 >**Backport Notes:**
 > The backport does not contain any raid frame modifications (number of debuffs shown / crowd control effects) since the
 > new raid frames do not exist in WotLK (they were implemented in Cataclysm).
