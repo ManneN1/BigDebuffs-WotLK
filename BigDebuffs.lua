@@ -230,6 +230,9 @@ BigDebuffs.Spells = {
 	-- Misc
 	[43183] = { type = "buffs_other", },  -- Drink
 	[20549] = { type = "cc", },  -- War Stomp
+	[28730] = { type = "cc", }, -- Arcane Torrent (Mana)
+	[25046] = { type = "cc", }, -- Arcane Torrent (Energy)
+	[50613] = { type = "cc", }, -- Arcane Torrent (Runic Power)
 }
 
 local units = {
