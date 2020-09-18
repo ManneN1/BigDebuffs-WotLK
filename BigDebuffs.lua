@@ -98,6 +98,7 @@ BigDebuffs.Spells = {
 	[5384] = { type = "buffs_defensive", },  -- Feign Death
 	[53271] = { type = "buffs_defensive", },  -- Master's Call
 	[53476] = { type = "buffs_defensive", }, -- Intervene (Pet)
+	[1742] = { type = "buffs_defensive", }, -- Cower (Pet)
 	[34471] = { type = "buffs_offensive", },  -- The Beast Within
 	[3034] = { type = "buffs_other", },  -- Viper Sting
 	[24394] = { type = "cc", },  -- Intimidation
