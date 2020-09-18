@@ -107,6 +107,7 @@ BigDebuffs.Spells = {
 	[14309] = { type = "cc", },  -- Freezing Trap
 	[60210] = { type = "cc", }, -- Freezing Arrow Effect
 	[53562] = { type = "cc", }, -- Ravage (Pet)
+	[53543] = { type = "cc", }, -- Snatch (Pet Disarm)
 	[53548] = { type = "roots", }, -- Pin (Pet)
 	-- Mage
 	[43039] = { type = "buffs_defensive", },  -- Ice Barrier
