@@ -147,6 +147,7 @@ BigDebuffs.Spells = {
 	[42917] = { type = "roots", },  -- Frost Nova
 	[2139] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
 	-- Paladin
+	[54428] = { type = "buffs_other", }, -- Divine Plea
 	[10278] = { type = "buffs_defensive", },  -- Hand of Protection
 		[5599] = { type = "buffs_defensive", },
 		[1022] = { type = "buffs_defensive", },
