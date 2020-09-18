@@ -211,6 +211,7 @@ BigDebuffs.Spells = {
 	[55694] = { type = "buffs_defensive", },  -- Enraged Regeneration
 	[871] = { type = "buffs_defensive", },  -- Shield Wall
 	[3411] = { type = "buffs_defensive", },  -- Intervene
+	[2565] = { type = "buffs_defensive", }, -- Shield Block
 	[1719] = { type = "buffs_offensive", },  -- Recklessness
 	[18499] = { type = "buffs_other", },  -- Berserker Rage
 	[676] = { type = "cc", },  -- Disarm
