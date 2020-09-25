@@ -208,12 +208,13 @@ BigDebuffs.Spells = {
 	[16191] = { type = "buffs_offensive", }, -- Mana Tide Totem
 	[30823] = { type = "buffs_defensive", }, -- Shamanistic Rage
 	[16188] = { type = "buffs_defensive", }, -- Nature's Swiftness
+	[58861] = { type = "cc", }, -- Bash (Spirit Wolf)
 	[51514] = { type = "cc", },  -- Hex
 	[39796] = { type = "cc", }, -- Stoneclaw Stun
 	[8178] = { type = "immunities_spells", }, -- Grounding Totem Effect
 	[63685] = { type = "roots", }, -- Freeze (Enhancement)
 	[64695] = { type = "roots", }, -- Earthgrab (Elemental)
-	[8145] = { type = "buffs_other", }, -- Tremor Totem
+	[58875] = { type = "buffs_other", }, -- Spirit Walk (Spirit Wolf)
 	[57994] = { type = "interrupts", interruptduration = 2, },  -- Wind Shear
 	-- Warlock
 	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
@@ -248,7 +249,7 @@ BigDebuffs.Spells = {
 	[46968] = { type = "cc", },  -- Shockwave
 	[5246] = { type = "cc", },  -- Intimidating Shout
 	[7922] = { type = "cc", }, -- Charge
-	[30197] = { type = "cc", }, -- Intercept
+	[20253] = { type = "cc", }, -- Intercept
 	[46924] = { type = "immunities", },  -- Bladestorm
 	[23920] = { type = "immunities_spells", },  -- Spell Reflection
 	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
