@@ -126,7 +126,7 @@ BigDebuffs.Spells = {
 	[4167] = { type = "roots", }, -- Web (Pet)
 	[26090] = { type = "interrupts", interruptduration = 2, }, -- Pummel (Pet)
 	-- Mage
-	[43039] = { type = "buffs_defensive", },  -- Ice Barrier
+	[43039] = { type = "buffs_other", },  -- Ice Barrier
 	[12472] = { type = "buffs_offensive", },  -- Icy Veins
 	[28682] = { type = "buffs_offensive", },  -- Combustion
 	[12042] = { type = "buffs_offensive", },  -- Arcane Power
@@ -151,6 +151,7 @@ BigDebuffs.Spells = {
 	[2139] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
 	-- Paladin
 	[54428] = { type = "buffs_other", }, -- Divine Plea
+	[58597] = { type = "buffs_other", }, -- Sacred Shield Proc
 	[10278] = { type = "buffs_defensive", },  -- Hand of Protection
 		[5599] = { type = "buffs_defensive", },
 		[1022] = { type = "buffs_defensive", },
@@ -178,6 +179,7 @@ BigDebuffs.Spells = {
 	[64901] = { type = "buffs_defensive", }, -- Hymn of Hope
 	[10060] = { type = "buffs_offensive", },  -- Power Infusion
 	[6346] = { type = "buffs_other", },  -- Fear Ward
+	[48066] = { type = "buffs_other", }, -- Power Word: Shield
 	[64044] = { type = "cc", }, -- Psychic Horror (Horrify)
 	[64058] = { type = "cc", }, -- Psychic Horror (Disarm)
 	[10890] = { type = "cc", },  -- Psychic Scream
@@ -219,6 +221,7 @@ BigDebuffs.Spells = {
 	-- Warlock
 	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
 	[18708] = { type = "buffs_other", },  -- Fel Domination
+	[47986] = { type = "buffs_other", }, -- Sacrifice
 	[60995] = { type = "cc", }, -- Demon Charge (Metamorphosis)
 	[47847] = { type = "cc", },  -- Shadowfury
 	[31117] = { type = "cc", },  -- Unstable Affliction (Silence)
