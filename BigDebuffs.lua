@@ -253,6 +253,7 @@ BigDebuffs.Spells = {
 	[5246] = { type = "cc", },  -- Intimidating Shout
 	[7922] = { type = "cc", }, -- Charge
 	[20253] = { type = "cc", }, -- Intercept
+	[18498] = { type = "cc", }, -- Silenced - Gag Order
 	[46924] = { type = "immunities", },  -- Bladestorm
 	[23920] = { type = "immunities_spells", },  -- Spell Reflection
 	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
