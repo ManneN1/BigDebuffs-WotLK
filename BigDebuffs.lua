@@ -128,7 +128,7 @@ BigDebuffs.Spells = {
 	-- Mage
 	[43039] = { type = "buffs_other", },  -- Ice Barrier
 	[12472] = { type = "buffs_offensive", },  -- Icy Veins
-	[28682] = { type = "buffs_offensive", },  -- Combustion
+	[54748] = { type = "buffs_offensive", }, -- Burning Determination (Interrupt/Silence Immunity)
 	[12042] = { type = "buffs_offensive", },  -- Arcane Power
 	[12043] = { type = "buffs_offensive", },  -- Presence of Mind
 	[12051] = { type = "buffs_offensive", },  -- Evocation
