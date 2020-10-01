@@ -250,7 +250,8 @@ BigDebuffs.Spells = {
 	[12798] = { type = "cc", }, -- Revenge Stun
 	[676] = { type = "cc", },  -- Disarm
 	[46968] = { type = "cc", },  -- Shockwave
-	[5246] = { type = "cc", },  -- Intimidating Shout
+	[5246] = { type = "cc", },  -- Intimidating Shout (Non - Target)
+	[20511] = { type = "cc", }, -- Intimidating Shout (Target)
 	[7922] = { type = "cc", }, -- Charge
 	[20253] = { type = "cc", }, -- Intercept
 	[18498] = { type = "cc", }, -- Silenced - Gag Order
