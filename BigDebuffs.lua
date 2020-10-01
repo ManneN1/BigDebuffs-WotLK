@@ -204,7 +204,7 @@ BigDebuffs.Spells = {
 	[31224] = { type = "immunities_spells", },  -- Cloak of Shadows
 	[1766] = { type = "interrupts", interruptduration = 5, },  -- Kick
 	-- Shaman
-	[64701] = { type = "buffs_offensive", },  -- Elemental Mastery
+	[16166] = { type = "buffs_offensive", }, -- Elemental Mastery (Instant Cast)
 	[2825] = { type = "buffs_offensive", },  -- Bloodlust
 	[32182] = { type = "buffs_offensive", },  -- Heroism
 	[16191] = { type = "buffs_offensive", }, -- Mana Tide Totem
