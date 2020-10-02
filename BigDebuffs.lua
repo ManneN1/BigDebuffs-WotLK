@@ -68,7 +68,7 @@ BigDebuffs.Spells = {
 	[50461] = { type = "buffs_defensive", },  -- Anti-Magic Zone
 	[47484] = { type = "buffs_defensive", }, -- Huddle (Ghoul)
 	[49028] = { type = "buffs_offensive", },  -- Dancing Rune Weapon // might not work - spell id vs aura
-	[49916] = { type = "cc", },  -- Strangulate
+	[47476] = { type = "cc", },  -- Strangulate
 	[47481] = { type = "cc", },  -- Gnaw
 	[49203] = { type = "cc", }, -- Hungering Cold
 	[48707] = { type = "immunities_spells", },  -- Anti-Magic Shell
