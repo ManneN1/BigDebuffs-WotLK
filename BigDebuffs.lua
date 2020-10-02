@@ -258,7 +258,7 @@ BigDebuffs.Spells = {
 	[46924] = { type = "immunities", },  -- Bladestorm
 	[23920] = { type = "immunities_spells", },  -- Spell Reflection
 	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
-	[72] = { type = "interrupts", interruptduration = 6, }, -- Shield Bash
+	[72] = { type = "interrupts", interruptduration = 5, }, -- Shield Bash
 	-- Misc
 	[43183] = { type = "buffs_other", },  -- Drink (Arena/Lvl 80 Water)
 		[57073] = { type = "buffs_other" }, -- (Mage Water)
