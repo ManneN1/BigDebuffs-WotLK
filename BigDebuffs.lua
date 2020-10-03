@@ -217,6 +217,7 @@ BigDebuffs.Spells = {
 	[63685] = { type = "roots", }, -- Freeze (Enhancement)
 	[64695] = { type = "roots", }, -- Earthgrab (Elemental)
 	[58875] = { type = "buffs_other", }, -- Spirit Walk (Spirit Wolf)
+	[55277] = { type = "buffs_other", }, -- Stoneclaw Totem (Absorb)
 	[57994] = { type = "interrupts", interruptduration = 2, },  -- Wind Shear
 	-- Warlock
 	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
