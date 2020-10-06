@@ -132,6 +132,7 @@ BigDebuffs.Spells = {
 	[12042] = { type = "buffs_offensive", },  -- Arcane Power
 	[12043] = { type = "buffs_offensive", },  -- Presence of Mind
 	[12051] = { type = "buffs_offensive", },  -- Evocation
+	[44544] = { type = "buffs_offensive", }, -- Fingers of Frost
 	[66] = { type = "buffs_offensive", },  -- Invisibility
 	[118] = { type = "cc", },  -- Polymorph
 		[12826] = { type = "cc", },
