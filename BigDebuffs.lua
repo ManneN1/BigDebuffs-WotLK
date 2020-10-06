@@ -225,6 +225,7 @@ BigDebuffs.Spells = {
 	[47986] = { type = "buffs_other", }, -- Sacrifice
 	[60995] = { type = "cc", }, -- Demon Charge (Metamorphosis)
 	[47847] = { type = "cc", },  -- Shadowfury
+		[30283] = { type = "cc", },
 	[31117] = { type = "cc", },  -- Unstable Affliction (Silence)
 	[18647] = { type = "cc", },  -- Banish
 	[47860] = { type = "cc", },  -- Death Coil
