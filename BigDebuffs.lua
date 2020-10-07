@@ -158,6 +158,7 @@ BigDebuffs.Spells = {
 	-- Paladin
 	[54428] = { type = "buffs_other", }, -- Divine Plea
 	[58597] = { type = "buffs_other", }, -- Sacred Shield Proc
+	[59578] = { type = "buffs_other", }, -- The Art of War
 	[10278] = { type = "buffs_defensive", },  -- Hand of Protection
 		[5599] = { type = "buffs_defensive", },
 		[1022] = { type = "buffs_defensive", },
