@@ -85,6 +85,11 @@ BigDebuffs.Spells = {
 	[53201] = { type = "buffs_offensive", }, -- Starfall
 	[53312] = { type = "buffs_other", }, -- Nature's Grasp
 	[33357] = { type = "buffs_other", },  -- Dash
+	[768] = { type = "buffs_other", }, -- Cat Form
+	[9634] = { type = "buffs_other", }, -- Dire Bear Form
+	[783] = { type = "buffs_other", }, -- Travel Form
+	[24858] = { type = "buffs_other", }, -- Moonkin Form
+	[33891] = { type = "buffs_other", }, -- Tree of Life
 	[49802] = { type = "cc" },  -- Maim
 	[8983] = { type = "cc", },  -- Bash
 	[18658] = {type = "cc"}, -- Hibernate
@@ -473,7 +478,7 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetParent(frame.anchor:GetParent())
 			frame:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
 			frame.cooldownContainer:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel()-1)
-			frame.cooldownContainer:SetSize(frame.anchor:GetWidth()-8, frame.anchor:GetHeight()-8)
+			frame.cooldownContainer:SetSize(frame.anchor:GetWidth()-9, frame.anchor:GetHeight()-8)
 			frame.anchor:SetDrawLayer("BACKGROUND")
 		else
 			frame:SetParent(frame.parent and frame.parent or frame.anchor)
