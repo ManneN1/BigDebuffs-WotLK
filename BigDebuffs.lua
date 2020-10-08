@@ -255,6 +255,9 @@ BigDebuffs.Spells = {
 	[1719] = { type = "buffs_offensive", },  -- Recklessness
 	[12292] = { type = "buffs_offensive", }, -- Death Wish
 	[18499] = { type = "buffs_other", },  -- Berserker Rage
+	[2457] = { type = "buffs_other", }, -- Battle Stance
+	[2458] = { type = "buffs_other", }, -- Berserker Stance
+	[71] = { type = "buffs_other", }, -- Defensive Stance
 	[12809] = { type = "cc", }, -- Concussion Blow
 	[12798] = { type = "cc", }, -- Revenge Stun
 	[676] = { type = "cc", },  -- Disarm
@@ -554,6 +557,20 @@ function BigDebuffs:OnEnable()
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("UNIT_SPELLCAST_FAILED")
 	self.interrupts = {}
+	self.lastKnownStance = {
+		player = nil,
+		target = nil,
+		focus = nil,
+		party1 = nil,
+		party2 = nil,
+		party3 = nil,
+		party4 = nil,
+		arena1 = nil,
+		arena2 = nil,
+		arena3 = nil,
+		arena4 = nil,
+		arena5 = nil,
+	}
 
 	-- Prevent OmniCC finish animations
 	if OmniCC then
@@ -615,7 +632,18 @@ function BigDebuffs:UNIT_SPELLCAST_FAILED(_,unit, _, _, spellid)
 end
 
 function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
-	_, subEvent, _, _, _, destGUID, destName, _, spellid, name = ...
+	_, subEvent, sourceGUID, _, _, destGUID, destName, _, spellid, name = ...
+
+	-- Setting the "last known" warrior stance for each unit
+	if subEvent == "SPELL_CAST_SUCCESS" and self.Spells[spellid] then
+		if spellid == 2457 or spellid == 2458 or spellid == 71 then
+			unit = self:GetUnitFromGUID(sourceGUID)
+
+			self.lastKnownStance[unit] = spellid
+
+			self:UNIT_AURA(nil, unit, true)
+		end
+	end
 
 	if subEvent ~= "SPELL_CAST_SUCCESS" and subEvent ~= "SPELL_INTERRUPT" then
 		return
@@ -700,7 +728,7 @@ function BigDebuffs:GetInterruptFor(unit)
 	end
 end
 
-function BigDebuffs:UNIT_AURA(event, unit)
+function BigDebuffs:UNIT_AURA(event, unit, isStance)
 	if not self.db.profile.unitFrames[unit:gsub("%d", "")] or 
 			not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled then 
 		return 
@@ -713,7 +741,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 	local UnitDebuff = BigDebuffs.test and UnitDebuffTest or UnitDebuff
 	
 	local now = GetTime()
-	local left, priority, duration, expires, icon, debuff, buff, interrupt = 0, 0
+	local left, priority, duration, expires, icon, isAura, interrupt = 0, 0
 	
 	for i = 1, 40 do
 		-- Check debuffs
@@ -725,7 +753,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 				if p and (p > priority or (p == prio and expires and e < expires)) then
 					left = e - now
 					duration = d
-					debuff = i
+					isAura = true
 					priority = p
 					expires = e
 					icon = ico
@@ -746,7 +774,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 					if p and (p > priority or (p == prio and expires and e < expires)) then
 						left = e - now
 						duration = d
-						debuff = i
+						isAura = true
 						priority = p
 						expires = e
 						icon = ico
@@ -764,14 +792,34 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		if p and (p > priority or (p == prio and expires and e < expires)) then
 			left = e - now
 			duration = d
-			debuff = 0
+			isAura = true
 			priority = p
 			expires = e
 			icon = ico
 		end
 	end
+
+	if isStance then
+		-- it's a warrior stance
+		local stanceId = self.lastKnownStance[unit]
+
+		if self.Spells[stanceId] then
+			n, _, ico = GetSpellInfo(stanceId)
+
+			local p = self:GetAuraPriority(n, stanceId)
+
+			if p and p >= priority then
+				left = 0
+				duration = 0
+				isAura = true
+				priority = p
+				expires = 0
+				icon = ico
+			end
+		end
+	end
 	
-	if debuff then
+	if isAura then
 		if frame.current ~= icon then
 			if frame.blizzard then
 				-- Blizzard Frame
@@ -785,7 +833,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			end
 		end
 		
-		if duration > 1 then
+		if duration >= 1 then
 			frame.cooldown:SetCooldown(expires - duration, duration)
 			frame.cooldownContainer:Show()
 		else 
@@ -801,16 +849,43 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			Adapt.portraits[frame.anchor].modelLayer:SetFrameStrata("LOW")
 		end
 
-		frame:Hide()
-		frame.current = nil
+		-- Resetting to the last known stance
+		local stanceId = self.lastKnownStance[unit]
+
+		if stanceId and self.Spells[stanceId] then
+			_, _, ico = GetSpellInfo(stanceId)
+
+			if frame.current ~= ico then
+				if frame.blizzard then
+					-- Blizzard Frame
+					SetPortraitToTexture(frame.icon, ico)
+					-- Adapt
+					if frame.anchor and Adapt and Adapt.portraits[frame.anchor] then
+						Adapt.portraits[frame.anchor].modelLayer:SetFrameStrata("BACKGROUND")
+					end
+				else
+					frame.icon:SetTexture(ico)
+				end
+			end
+			frame.cooldown:SetCooldown(0, 0)
+			frame.cooldownContainer:Hide()
+
+			frame:Show()
+			frame.current = ico
+		else
+			frame:Hide()
+			frame.current = nil
+		end
 	end
 end
 
 function BigDebuffs:PLAYER_FOCUS_CHANGED()
+	self.lastKnownStance.focus = nil
 	self:UNIT_AURA(nil, "focus")
 end
 
 function BigDebuffs:PLAYER_TARGET_CHANGED()
+	self.lastKnownStance.target = nil
 	self:UNIT_AURA(nil, "target")
 end
 
