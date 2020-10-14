@@ -99,6 +99,7 @@ BigDebuffs.Spells = {
 	[33786] = { type = "immunities" },  -- Cyclone
 	[45334] = { type = "roots", },  -- Feral Charge Effect (Immobilize)
 	[53308] = { type = "roots", },  -- Entangling Roots
+	[53313] = { type = "roots", }, -- Entangling Roots (From Nature's Grasp)
 	[19675] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge Effect (Interrupt)
 	-- Hunter
 	[3045] = { type = "buffs_offensive", }, -- Rapid Fire
@@ -557,20 +558,6 @@ function BigDebuffs:OnEnable()
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("UNIT_SPELLCAST_FAILED")
 	self.interrupts = {}
-	self.lastKnownStance = {
-		player = nil,
-		target = nil,
-		focus = nil,
-		party1 = nil,
-		party2 = nil,
-		party3 = nil,
-		party4 = nil,
-		arena1 = nil,
-		arena2 = nil,
-		arena3 = nil,
-		arena4 = nil,
-		arena5 = nil,
-	}
 
 	-- Prevent OmniCC finish animations
 	if OmniCC then
@@ -588,6 +575,22 @@ function BigDebuffs:PLAYER_ENTERING_WORLD()
 	for i = 1, #units do
 		self:AttachUnitFrame(units[i])
 	end
+
+	self.lastKnownStance = {
+		player = nil,
+		target = nil,
+		focus = nil,
+		party1 = nil,
+		party2 = nil,
+		party3 = nil,
+		party4 = nil,
+		arena1 = nil,
+		arena2 = nil,
+		arena3 = nil,
+		arena4 = nil,
+		arena5 = nil,
+	}
+
 end
 
 -- For unit frames
