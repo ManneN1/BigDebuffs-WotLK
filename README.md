@@ -1,6 +1,6 @@
 # BigDebuffs
 
-BigDebuffs is an _extremely lightweight_ addon which repaces unit frame portraits with auras, stances and interrupts when present.
+BigDebuffs is an _extremely lightweight_ addon which replaces unit frame portraits with auras, stances and interrupts whenever present.
 
 The addon menu can be accessed by typing /bd or /bigdebuffs.
 
