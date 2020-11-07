@@ -637,15 +637,11 @@ function BigDebuffs:UNIT_SPELLCAST_FAILED(_,unit, _, _, spellid)
 end
 
 function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
-	_, subEvent, sourceGUID, _, _, destGUID, destName, _, spellid, name = ...
+	local _, subEvent, sourceGUID, _, _, destGUID, destName, _, spellid, name = ...
 
 	if subEvent == "SPELL_CAST_SUCCESS" and self.Spells[spellid] then
 		if spellid == 2457 or spellid == 2458 or spellid == 71 then
-			unit = self:GetUnitFromGUID(sourceGUID)
-
-			self.lastKnownStance[unit] = spellid
-
-			self:UNIT_AURA(nil, unit, true)
+			self:UpdateStance(sourceGUID, spellid)
 		end
 	end
 
@@ -671,6 +667,29 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 	self:UpdateInterrupt(nil, destGUID, spellid, duration)
 end
 
+function BigDebuffs:UpdateStance(guid, spellid)
+	if self.lastKnownStance[guid] == nil then
+		self.lastKnownStance[guid] = {}
+	end
+	
+	self.lastKnownStance[guid].stance = spellid
+	self.lastKnownStance[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
+
+	local unit = self:GetUnitFromGUID(guid)
+	if unit then
+		self:UNIT_AURA(nil, unit)
+	end
+end
+
+function BigDebuffs:ClearStanceGUID(guid)
+	local unit = self:GetUnitFromGUID(guid)
+	if unit == nil then
+		self.lastKnownStance[guid] = nil
+	else
+		self.lastKnownStance[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
+	end
+end
+
 function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
 	local t = GetTime()
 	-- new interrupt
@@ -691,8 +710,9 @@ function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
 		unit = self:GetUnitFromGUID(guid)
 	end
 	
-	self:UNIT_AURA(nil, unit)
-	
+	if unit then	
+		self:UNIT_AURA(nil, unit)
+	end
 	-- clears the interrupt after end of duration
 	if duration then
 		BigDebuffs:ScheduleTimer(self.UpdateInterrupt, duration+0.1, self, unit, guid, spellid)
@@ -732,7 +752,7 @@ function BigDebuffs:GetInterruptFor(unit)
 	end
 end
 
-function BigDebuffs:UNIT_AURA(event, unit, isStance)
+function BigDebuffs:UNIT_AURA(event, unit)
 	if not self.db.profile.unitFrames[unit:gsub("%d", "")] or 
 			not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled then 
 		return 
@@ -803,23 +823,20 @@ function BigDebuffs:UNIT_AURA(event, unit, isStance)
 		end
 	end
 
-	if isStance then
-		-- it's a warrior stance
-		local stanceId = self.lastKnownStance[unit]
-
-		if self.Spells[stanceId] then
-			n, _, ico = GetSpellInfo(stanceId)
-
-			local p = self:GetAuraPriority(n, stanceId)
-
-			if p and p >= priority then
-				left = 0
-				duration = 0
-				isAura = true
-				priority = p
-				expires = 0
-				icon = ico
-			end
+	-- need to always look for a stance (if we only look for it once a player
+	-- changes stance we will never get back to it again once other auras fade)
+	local guid = UnitGUID(unit)
+	local stanceId = self.lastKnownStance[guid].stance
+	if self.Spells[stanceId] then
+		n, _, ico = GetSpellInfo(stanceId)
+		local p = self:GetAuraPriority(n, stanceId)
+		if p and p >= priority then
+			left = 0
+			duration = 0
+			isAura = true
+			priority = p
+			expires = 0
+			icon = ico
 		end
 	end
 	
@@ -851,31 +868,6 @@ function BigDebuffs:UNIT_AURA(event, unit, isStance)
 		-- Adapt
 		if frame.anchor and frame.blizzard and Adapt and Adapt.portraits[frame.anchor] then
 			Adapt.portraits[frame.anchor].modelLayer:SetFrameStrata("LOW")
-		end
-
-		-- Resetting to the last known stance
-		local stanceId = self.lastKnownStance[unit]
-
-		if stanceId and self.Spells[stanceId] then
-			_, _, ico = GetSpellInfo(stanceId)
-
-			if frame.current ~= ico then
-				if frame.blizzard then
-					-- Blizzard Frame
-					SetPortraitToTexture(frame.icon, ico)
-					-- Adapt
-					if frame.anchor and Adapt and Adapt.portraits[frame.anchor] then
-						Adapt.portraits[frame.anchor].modelLayer:SetFrameStrata("BACKGROUND")
-					end
-				else
-					frame.icon:SetTexture(ico)
-				end
-			end
-			frame.cooldown:SetCooldown(0, 0)
-			frame.cooldownContainer:Hide()
-
-			frame:Show()
-			frame.current = ico
 		else
 			frame:Hide()
 			frame.current = nil
@@ -884,12 +876,10 @@ function BigDebuffs:UNIT_AURA(event, unit, isStance)
 end
 
 function BigDebuffs:PLAYER_FOCUS_CHANGED()
-	self.lastKnownStance.focus = nil
 	self:UNIT_AURA(nil, "focus")
 end
 
 function BigDebuffs:PLAYER_TARGET_CHANGED()
-	self.lastKnownStance.target = nil
 	self:UNIT_AURA(nil, "target")
 end
 
