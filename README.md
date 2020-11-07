@@ -19,7 +19,7 @@ Once the addon is finished downloading, extract the contents to your `Interface/
 > The backport is essentially a much improved version of LoseControl.
 
  I'd like to thank the following people for their contributions to this release:
-> [jordon][1] for the base addon, as developed throughout MoP-BfA (and possibly further)
+> [jordon][1] for the base addon, as developed throughout MoP-BfA (and possibly further).
 > [jakeswork][2] for his completion of the WotLK aura list, minor bug fixes and the Warrior stance logic addition.
 
 
