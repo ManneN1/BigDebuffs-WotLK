@@ -1,5 +1,7 @@
 
--- BigDebuffs by Jordon (& improved / backported by Konjunktur & Apparent)
+-- BigDebuffs by Jordon 
+-- Backported and general improvements by Konjunktur
+-- Spell list and minor improvements by Apparent
 
 BigDebuffs = LibStub("AceAddon-3.0"):NewAddon("BigDebuffs", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0")
 
@@ -637,7 +639,6 @@ end
 function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 	_, subEvent, sourceGUID, _, _, destGUID, destName, _, spellid, name = ...
 
-	-- Setting the "last known" warrior stance for each unit
 	if subEvent == "SPELL_CAST_SUCCESS" and self.Spells[spellid] then
 		if spellid == 2457 or spellid == 2458 or spellid == 71 then
 			unit = self:GetUnitFromGUID(sourceGUID)
