@@ -826,17 +826,19 @@ function BigDebuffs:UNIT_AURA(event, unit)
 	-- need to always look for a stance (if we only look for it once a player
 	-- changes stance we will never get back to it again once other auras fade)
 	local guid = UnitGUID(unit)
-	local stanceId = self.lastKnownStance[guid].stance
-	if self.Spells[stanceId] then
-		n, _, ico = GetSpellInfo(stanceId)
-		local p = self:GetAuraPriority(n, stanceId)
-		if p and p >= priority then
-			left = 0
-			duration = 0
-			isAura = true
-			priority = p
-			expires = 0
-			icon = ico
+	if self.lastKnownStance[guid] then 
+		local stanceId = self.lastKnownStance[guid].stance
+		if stanceId and self.Spells[stanceId] then
+			n, _, ico = GetSpellInfo(stanceId)
+			local p = self:GetAuraPriority(n, stanceId)
+			if p and p >= priority then
+				left = 0
+				duration = 0
+				isAura = true
+				priority = p
+				expires = 0
+				icon = ico
+			end
 		end
 	end
 	
