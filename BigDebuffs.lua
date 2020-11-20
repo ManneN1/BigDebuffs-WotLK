@@ -577,22 +577,7 @@ function BigDebuffs:PLAYER_ENTERING_WORLD()
 	for i = 1, #units do
 		self:AttachUnitFrame(units[i])
 	end
-
-	self.lastKnownStance = {
-		player = nil,
-		target = nil,
-		focus = nil,
-		party1 = nil,
-		party2 = nil,
-		party3 = nil,
-		party4 = nil,
-		arena1 = nil,
-		arena2 = nil,
-		arena3 = nil,
-		arena4 = nil,
-		arena5 = nil,
-	}
-
+	self.lastKnownStance = {}
 end
 
 -- For unit frames
