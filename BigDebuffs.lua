@@ -577,7 +577,7 @@ function BigDebuffs:PLAYER_ENTERING_WORLD()
 	for i = 1, #units do
 		self:AttachUnitFrame(units[i])
 	end
-	self.lastKnownStance = {}
+	self.stances = {}
 end
 
 -- For unit frames
@@ -653,12 +653,14 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 end
 
 function BigDebuffs:UpdateStance(guid, spellid)
-	if self.lastKnownStance[guid] == nil then
-		self.lastKnownStance[guid] = {}
+	if self.stances[guid] == nil then
+		self.stances[guid] = {}
+	else
+		self:CancelTimer(self.stances[guid].timer)
 	end
 	
-	self.lastKnownStance[guid].stance = spellid
-	self.lastKnownStance[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
+	self.stances[guid].stance = spellid
+	self.stances[guid].timer = self:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
 
 	local unit = self:GetUnitFromGUID(guid)
 	if unit then
@@ -669,9 +671,9 @@ end
 function BigDebuffs:ClearStanceGUID(guid)
 	local unit = self:GetUnitFromGUID(guid)
 	if unit == nil then
-		self.lastKnownStance[guid] = nil
+		self.stances[guid] = nil
 	else
-		self.lastKnownStance[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
+		self.stances[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
 	end
 end
 
@@ -811,8 +813,8 @@ function BigDebuffs:UNIT_AURA(event, unit)
 	-- need to always look for a stance (if we only look for it once a player
 	-- changes stance we will never get back to it again once other auras fade)
 	local guid = UnitGUID(unit)
-	if self.lastKnownStance[guid] then 
-		local stanceId = self.lastKnownStance[guid].stance
+	if self.stances[guid] then 
+		local stanceId = self.stances[guid].stance
 		if stanceId and self.Spells[stanceId] then
 			n, _, ico = GetSpellInfo(stanceId)
 			local p = self:GetAuraPriority(n, stanceId)
