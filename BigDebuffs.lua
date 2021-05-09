@@ -15,31 +15,37 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
+				cdMod = 9,
 			},
 			focus = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
+				cdMod = 9,
 			},
 			target = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
+				cdMod = 9,
 			},
 			pet = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
+				cdMod = 9,
 			},
 			party = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
+				cdMod = 9,
 			},
 			arena = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
+				cdMod = 9,
 			},
 			cc = true,
 			interrupts = true,
@@ -156,7 +162,7 @@ BigDebuffs.Spells = {
 	[64346] = { type = "cc", }, -- Fiery Payback (Fire Mage Disarm)
 	[45438] = { type = "immunities", },  -- Ice Block
 	[12494] = { type = "roots", },  -- Frostbite
-	[42917] = { type = "roots", },  -- Frost Nova
+	[122] = { type = "roots", },  -- Frost Nova
 	[2139] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
 	-- Paladin
 	[54428] = { type = "buffs_other", }, -- Divine Plea
@@ -420,12 +426,27 @@ function BigDebuffs:Refresh()
 		frame.current = nil
 		--frame.cooldown:SetHideCountdownNumbers(not self.db.profile.unitFrames.cooldownCount)
 		frame.cooldown.noCooldownCount = not self.db.profile.unitFrames.cooldownCount
+		self:AttachUnitFrame(unit)
 		self:UNIT_AURA(nil, unit)
 	end
 end
 
+local unitsToUpdate = {}
+
+function BigDebuffs:PLAYER_REGEN_ENABLED()
+	for unit, _ in pairs(unitsToUpdate) do
+		self:AttachUnitFrame(unit)
+	end
+	self:UnregisterEvent("PLAYER_REGEN_ENABLED")
+	unitsToUpdate = {}
+end
+
 function BigDebuffs:AttachUnitFrame(unit)
-	if InCombatLockdown() then return end
+	if InCombatLockdown() then 
+		unitsToUpdate[unit] = true
+		self:RegisterEvent("PLAYER_REGEN_ENABLED")
+		return 
+	end
 
 	local frame = self.UnitFrames[unit]
 	local frameName = "BigDebuffs" .. unit .. "UnitFrame"
@@ -485,7 +506,7 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetParent(frame.anchor:GetParent())
 			frame:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
 			frame.cooldownContainer:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel()-1)
-			frame.cooldownContainer:SetSize(frame.anchor:GetWidth()-9, frame.anchor:GetHeight()-8)
+			frame.cooldownContainer:SetSize(frame.anchor:GetWidth() - config.cdMod, frame.anchor:GetHeight() -  config.cdMod)
 			frame.anchor:SetDrawLayer("BACKGROUND")
 		else
 			frame:SetParent(frame.parent and frame.parent or frame.anchor)
@@ -511,6 +532,8 @@ function BigDebuffs:AttachUnitFrame(unit)
 		-- Manual
 		frame:SetParent(UIParent)
 		frame:ClearAllPoints()
+		
+		frame:SetSize(config.size, config.size)
 		frame.cooldownContainer:SetSize(frame:GetWidth(), frame:GetHeight())
 
 		if not self.db.profile.unitFrames[unit:gsub("%d", "")] then self.db.profile.unitFrames[unit:gsub("%d", "")] = {} end
@@ -524,7 +547,6 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetPoint("CENTER", relativeFrame, "CENTER")
 		end
 		
-		frame:SetSize(config.size, config.size)
 	end
 
 end
@@ -744,7 +766,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled then 
 		return 
 	end
-	self:AttachUnitFrame(unit)
+	--self:AttachUnitFrame(unit)
 	
 	local frame = self.UnitFrames[unit]
 	if not frame then return end
