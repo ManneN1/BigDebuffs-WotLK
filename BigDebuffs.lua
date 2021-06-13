@@ -424,7 +424,6 @@ function BigDebuffs:Refresh()
 	for unit, frame in pairs(self.UnitFrames) do
 		frame:Hide()
 		frame.current = nil
-		--frame.cooldown:SetHideCountdownNumbers(not self.db.profile.unitFrames.cooldownCount)
 		frame.cooldown.noCooldownCount = not self.db.profile.unitFrames.cooldownCount
 		self:AttachUnitFrame(unit)
 		self:UNIT_AURA(nil, unit)
@@ -453,12 +452,10 @@ function BigDebuffs:AttachUnitFrame(unit)
 
 	if not frame then
 		frame = CreateFrame("Button", frameName, UIParent, "BigDebuffsUnitFrameTemplate")
-		self.UnitFrames[unit] = frame
-
 		frame.icon = _G[frameName.."Icon"]
-		frame.icon:SetDrawLayer("BORDER")
-
 		frame.cooldownContainer = CreateFrame("Button", frameName.."CooldownContainer", frame)
+		self.UnitFrames[unit] = frame
+		frame.icon:SetDrawLayer("BORDER")
 		frame.cooldownContainer:SetPoint("CENTER")
 		frame.cooldown:SetParent(frame.cooldownContainer)
 		frame.cooldown:SetAllPoints()
@@ -506,7 +503,7 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetParent(frame.anchor:GetParent())
 			frame:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
 			frame.cooldownContainer:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel()-1)
-			frame.cooldownContainer:SetSize(frame.anchor:GetWidth() - config.cdMod, frame.anchor:GetHeight() -  config.cdMod)
+			frame.cooldownContainer:SetSize(frame.anchor:GetWidth() - config.cdMod, frame.anchor:GetHeight() - config.cdMod)
 			frame.anchor:SetDrawLayer("BACKGROUND")
 		else
 			frame:SetParent(frame.parent and frame.parent or frame.anchor)
@@ -535,11 +532,15 @@ function BigDebuffs:AttachUnitFrame(unit)
 		
 		frame:SetSize(config.size, config.size)
 		frame.cooldownContainer:SetSize(frame:GetWidth(), frame:GetHeight())
+		
+		frame:SetFrameLevel(frame:GetParent():GetFrameLevel()+1)
+		frame.cooldownContainer:SetFrameLevel(frame:GetParent():GetFrameLevel())
+		frame.cooldownContainer:SetSize(frame:GetWidth(), frame:GetHeight())
 
-		if not self.db.profile.unitFrames[unit:gsub("%d", "")] then self.db.profile.unitFrames[unit:gsub("%d", "")] = {} end
+		if not self.db.profile.unitFrames[unit] then self.db.profile.unitFrames[unit] = {} end
 
-		if self.db.profile.unitFrames[unit:gsub("%d", "")].position then
-			frame:SetPoint(unpack(self.db.profile.unitFrames[unit:gsub("%d", "")].position))
+		if self.db.profile.unitFrames[unit].position then
+			frame:SetPoint(unpack(self.db.profile.unitFrames[unit].position))
 		else
 			-- No saved position, anchor to the blizzard position
 			LoadAddOn("Blizzard_ArenaUI")
