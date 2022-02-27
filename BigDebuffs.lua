@@ -530,7 +530,6 @@ function BigDebuffs:AttachUnitFrame(unit)
 		frame:SetParent(UIParent)
 		frame:ClearAllPoints()
 		
-		frame:SetSize(config.size, config.size)
 		frame.cooldownContainer:SetSize(frame:GetWidth(), frame:GetHeight())
 		
 		frame:SetFrameLevel(frame:GetParent():GetFrameLevel()+1)
@@ -548,6 +547,7 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetPoint("CENTER", relativeFrame, "CENTER")
 		end
 		
+		frame:SetSize(config.size, config.size)
 	end
 
 end
@@ -866,7 +866,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			end
 		end
 		
-		if duration >= 1 then
+		if duration > 1 then
 			frame.cooldown:SetCooldown(expires - duration, duration)
 			frame.cooldownContainer:Show()
 		else 
