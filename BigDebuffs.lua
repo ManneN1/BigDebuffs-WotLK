@@ -81,7 +81,7 @@ BigDebuffs.Spells = {
 	[49203] = { type = "cc", }, -- Hungering Cold
 	[48707] = { type = "immunities_spells", },  -- Anti-Magic Shell
 	[49039] = { type = "immunities_spells", },  -- Lichborne
-	[53550] = { type = "interrupts", interruptduration = 4, },  -- Mind Freeze
+	[53550] = { type = "interrupts", duration = 4, },  -- Mind Freeze
 	-- Druid
 	[22842] = { type = "buffs_defensive", },  -- Frenzied Regeneration
 	[17116] = { type = "buffs_defensive", }, -- Nature's Swiftness
@@ -108,7 +108,7 @@ BigDebuffs.Spells = {
 	[45334] = { type = "roots", },  -- Feral Charge Effect (Immobilize)
 	[53308] = { type = "roots", },  -- Entangling Roots
 	[53313] = { type = "roots", }, -- Entangling Roots (From Nature's Grasp)
-	[19675] = { type = "interrupts", interruptduration = 4, },  -- Feral Charge Effect (Interrupt)
+	[19675] = { type = "interrupts", duration = 4, },  -- Feral Charge Effect (Interrupt)
 	-- Hunter
 	[3045] = { type = "buffs_offensive", }, -- Rapid Fire
 	[53480] = { type = "buffs_defensive", },  -- Roar of Sacrifice (Hunter Pet Skill)
@@ -138,7 +138,7 @@ BigDebuffs.Spells = {
 		[64804] = { type = "roots", },
 	[53548] = { type = "roots", }, -- Pin (Pet)
 	[4167] = { type = "roots", }, -- Web (Pet)
-	[26090] = { type = "interrupts", interruptduration = 2, }, -- Pummel (Pet)
+	[26090] = { type = "interrupts", duration = 2, }, -- Pummel (Pet)
 	-- Mage
 	[43039] = { type = "buffs_other", },  -- Ice Barrier
 	[12472] = { type = "buffs_offensive", },  -- Icy Veins
@@ -163,7 +163,7 @@ BigDebuffs.Spells = {
 	[45438] = { type = "immunities", },  -- Ice Block
 	[12494] = { type = "roots", },  -- Frostbite
 	[122] = { type = "roots", },  -- Frost Nova
-	[2139] = { type = "interrupts", interruptduration = 6, },  -- Counterspell (Mage)
+	[2139] = { type = "interrupts", duration = 6, },  -- Counterspell (Mage)
 	-- Paladin
 	[54428] = { type = "buffs_other", }, -- Divine Plea
 	[58597] = { type = "buffs_other", }, -- Sacred Shield Proc
@@ -218,7 +218,7 @@ BigDebuffs.Spells = {
 	[1833] = { type = "cc", },  -- Cheap Shot
 	[18425] = { type = "cc", }, -- Silence (Improved Kick)
 	[31224] = { type = "immunities_spells", },  -- Cloak of Shadows
-	[1766] = { type = "interrupts", interruptduration = 5, },  -- Kick
+	[1766] = { type = "interrupts", duration = 5, },  -- Kick
 	-- Shaman
 	[16166] = { type = "buffs_offensive", }, -- Elemental Mastery (Instant Cast)
 	[2825] = { type = "buffs_offensive", },  -- Bloodlust
@@ -234,7 +234,7 @@ BigDebuffs.Spells = {
 	[64695] = { type = "roots", }, -- Earthgrab (Elemental)
 	[58875] = { type = "buffs_other", }, -- Spirit Walk (Spirit Wolf)
 	[55277] = { type = "buffs_other", }, -- Stoneclaw Totem (Absorb)
-	[57994] = { type = "interrupts", interruptduration = 2, },  -- Wind Shear
+	[57994] = { type = "interrupts", duration = 2, },  -- Wind Shear
 	-- Warlock
 	[47241] = { type = "buffs_offensive", }, -- Metamorphosis
 	[18708] = { type = "buffs_other", },  -- Fel Domination
@@ -250,7 +250,7 @@ BigDebuffs.Spells = {
 	[17928] = { type = "cc", },  -- Howl of Terror
 	[24259] = { type = "cc", }, -- Spell Lock (Silence)
 	[47995] = { type = "cc", }, -- Intercept (Felguard)
-	[19647] = { type = "interrupts", interruptduration = 6, },  -- Spell Lock (Interrupt)
+	[19647] = { type = "interrupts", duration = 6, },  -- Spell Lock (Interrupt)
 	-- Warrior
 	[12975] = { type = "buffs_defensive", },  -- Last Stand
 	[55694] = { type = "buffs_defensive", },  -- Enraged Regeneration
@@ -278,8 +278,8 @@ BigDebuffs.Spells = {
 	[18498] = { type = "cc", }, -- Silenced - Gag Order
 	[46924] = { type = "immunities", },  -- Bladestorm
 	[23920] = { type = "immunities_spells", },  -- Spell Reflection
-	[6552] = { type = "interrupts", interruptduration = 4, },  -- Pummel
-	[72] = { type = "interrupts", interruptduration = 5, }, -- Shield Bash
+	[6552] = { type = "interrupts", duration = 4, },  -- Pummel
+	[72] = { type = "interrupts", duration = 5, }, -- Shield Bash
 	-- Misc
 	[43183] = { type = "buffs_other", },  -- Drink (Arena/Lvl 80 Water)
 		[57073] = { type = "buffs_other" }, -- (Mage Water)
@@ -669,7 +669,7 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 	
 	local spelldata = self.Spells[name] and self.Spells[name] or self.Spells[spellid]
 	if spelldata == nil or spelldata.type ~= "interrupts" then return end
-	local duration = spelldata.interruptduration
+	local duration = spelldata.duration
    	if not duration then return end
 	
 	self:UpdateInterrupt(nil, destGUID, spellid, duration)
