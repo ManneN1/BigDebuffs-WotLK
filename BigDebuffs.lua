@@ -4,6 +4,8 @@
 -- Spell list and minor improvements by Apparent
 
 BigDebuffs = LibStub("AceAddon-3.0"):NewAddon("BigDebuffs", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0")
+local Masque = LibStub("Masque", true)
+
 
 -- Defaults
 local defaults = {
@@ -464,6 +466,20 @@ function BigDebuffs:AttachUnitFrame(unit)
 		frame:RegisterForDrag("LeftButton")
 		frame:SetMovable(true)
 		frame.unit = unit
+        
+        if Masque then
+            if not frame.masqueGroup then
+                local group = Masque:Group("BigDebuffs", unit:gsub('%d',''))
+                frame.masqueGroup = group
+                frame.masqueGroup:AddButton(frame,
+                    {
+                        Cooldown = frame.cooldown,
+                        Gloss = frame.icon,
+                        Icon = frame.icon,
+                    },
+                nil, true)
+            end
+        end
 	end
 
 	frame:EnableMouse(self.test)
@@ -525,6 +541,9 @@ function BigDebuffs:AttachUnitFrame(unit)
 		else
 			frame:SetAllPoints(frame.anchor)
 		end
+        if Masque then
+            frame.masqueGroup:ReSkin()
+        end
 	else
 		-- Manual
 		frame:SetParent(UIParent)
@@ -548,8 +567,11 @@ function BigDebuffs:AttachUnitFrame(unit)
 		end
 		
 		frame:SetSize(config.size, config.size)
+        if Masque then
+            frame.masqueGroup:ReSkin()
+        end
 	end
-
+    
 end
 
 function BigDebuffs:SaveUnitFramePosition(frame)
