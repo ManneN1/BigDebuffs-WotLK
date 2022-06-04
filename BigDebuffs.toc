@@ -1,11 +1,11 @@
-## Interface: 30300
+## Interface: 33500
 ## Title: BigDebuffs
 ## Notes: Increases the debuff size of crowd control effects on the Blizzard raid frames
 ## Version: v6.4
 ## Author: Jordon (WoTLK backport by Konjunktur)
 ## DefaultState: Enabled
 ## SavedVariables: BigDebuffsDB
-## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3, Adapt, OmniCC, ButtonFacade
+## OptionalDeps: LibStub, CallbackHandler-1.0, Ace3, Adapt, OmniCC, Masque
 
 #@no-lib-strip@
 embeds.xml
