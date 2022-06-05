@@ -83,7 +83,7 @@ BigDebuffs.Spells = {
 	[49203] = { type = "cc", }, -- Hungering Cold
 	[48707] = { type = "immunities_spells", },  -- Anti-Magic Shell
 	[49039] = { type = "immunities_spells", },  -- Lichborne
-	[53550] = { type = "interrupts", duration = 4, },  -- Mind Freeze
+	[47528] = { type = "interrupts", duration = 4, },  -- Mind Freeze
 	-- Druid
 	[22842] = { type = "buffs_defensive", },  -- Frenzied Regeneration
 	[17116] = { type = "buffs_defensive", }, -- Nature's Swiftness
@@ -669,6 +669,7 @@ end
 function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 	local _, subEvent, sourceGUID, _, _, destGUID, destName, _, spellid, name = ...
 
+    -- Stance logic
 	if subEvent == "SPELL_CAST_SUCCESS" and self.Spells[spellid] then
 		if spellid == 2457 or spellid == 2458 or spellid == 71 then
 			self:UpdateStance(sourceGUID, spellid)
@@ -738,9 +739,7 @@ function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
 		end
 	end
 	
-	if unit == nil then
-		unit = self:GetUnitFromGUID(guid)
-	end
+	unit = unit and unit or self:GetUnitFromGUID(guid)
 	
 	if unit then	
 		self:UNIT_AURA(nil, unit)
