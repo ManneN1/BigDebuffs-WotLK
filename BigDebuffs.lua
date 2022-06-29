@@ -18,45 +18,86 @@ local defaults = {
 				anchor = "auto",
 				size = 50,
 				cdMod = 9,
+                cc = true,
+                interrupts = false,
+                immunities = false,
+                immunities_spells = false,
+                buffs_defensive = false,
+                buffs_offensive = false,
+                buffs_other = false,
+                roots = true,
 			},
 			focus = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
 				cdMod = 9,
+                cc = true,
+                interrupts = true,
+                immunities = true,
+                immunities_spells = true,
+                buffs_defensive = true,
+                buffs_offensive = true,
+                buffs_other = true,
+                roots = true,
 			},
 			target = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
 				cdMod = 9,
+                cc = true,
+                interrupts = true,
+                immunities = true,
+                immunities_spells = true,
+                buffs_defensive = true,
+                buffs_offensive = true,
+                buffs_other = true,
+                roots = true,
 			},
 			pet = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
 				cdMod = 9,
+                cc = true,
+                interrupts = true,
+                immunities = true,
+                immunities_spells = true,
+                buffs_defensive = true,
+                buffs_offensive = true,
+                buffs_other = true,
+                roots = true,
 			},
 			party = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
 				cdMod = 9,
+                cc = true,
+                interrupts = true,
+                immunities = true,
+                immunities_spells = true,
+                buffs_defensive = true,
+                buffs_offensive = true,
+                buffs_other = true,
+                roots = true,
 			},
 			arena = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
 				cdMod = 9,
+                cc = true,
+                interrupts = true,
+                immunities = true,
+                immunities_spells = true,
+                buffs_defensive = true,
+                buffs_offensive = true,
+                buffs_other = true,
+                roots = true,
 			},
-			cc = true,
-			interrupts = true,
-			immunities = true,
-			immunities_spells = true,
-			buffs_defensive = true,
-			buffs_offensive = true,
-			buffs_other = true,
-			roots = true,
+
 		},
 		priority = {
 			immunities = 90,
@@ -593,7 +634,10 @@ end
 local function UnitDebuffTest(unit, index)
 	local debuff = TestDebuffs[index]
 	if not debuff then return end
-	return GetSpellInfo(debuff[1]), nil, debuff[2], 0, "Magic", 50, GetTime()+50, nil, nil, nil, debuff[1]
+    
+    local duration = random(4, 50)
+    
+	return GetSpellInfo(debuff[1]), nil, debuff[2], 0, "Magic", duration, GetTime()+duration, nil, nil, nil, debuff[1]
 end
 
 function BigDebuffs:OnEnable()
@@ -615,7 +659,9 @@ function BigDebuffs:OnEnable()
 		end, true)
 	end
 
-	self:InsertTestDebuff(69369) 	-- Predator's Swiftness
+	self:InsertTestDebuff(69369) -- Predatory Strikes
+    self:InsertTestDebuff(8643) -- Kidney Shot
+    self:InsertTestDebuff(1766)  -- Kick
 end
 
 function BigDebuffs:PLAYER_ENTERING_WORLD()
@@ -626,24 +672,24 @@ function BigDebuffs:PLAYER_ENTERING_WORLD()
 end
 
 -- For unit frames
-function BigDebuffs:GetAuraPriority(name, id)
-	if not self.Spells[id] and not self.Spells[name] then return end
+function BigDebuffs:GetAuraPriority(unit, name, id)
+	if not unit or (not self.Spells[id] and not self.Spells[name]) then return end
 	
 	id = self.Spells[id] and id or name
 	
 	-- Make sure category is enabled
-	if not self.db.profile.unitFrames[self.Spells[id].type] then return end
-
+	if not self.db.profile.unitFrames[unit:gsub("%d", "")][self.Spells[id].type] then return end
+    
 	-- Check for user set
 	if self.db.profile.spells[id] then
 		if self.db.profile.spells[id].unitFrames and self.db.profile.spells[id].unitFrames == 0 then return end
 		if self.db.profile.spells[id].priority then return self.db.profile.spells[id].priority end
 	end
-
+    
 	if self.Spells[id].nounitFrames and (not self.db.profile.spells[id] or not self.db.profile.spells[id].unitFrames) then
 		return
 	end
-
+    
 	return self.db.profile.priority[self.Spells[id].type] or 0
 end
 
@@ -788,7 +834,6 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled then 
 		return 
 	end
-	--self:AttachUnitFrame(unit)
 	
 	local frame = self.UnitFrames[unit]
 	if not frame then return end
@@ -804,7 +849,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		
 		if id then
 			if self.Spells[n] or self.Spells[id] then
-				local p = self:GetAuraPriority(n, id)
+				local p = self:GetAuraPriority(unit, n, id)
 				if p and (p > priority or (p == prio and expires and e < expires)) then
 					left = e - now
 					duration = d
@@ -824,7 +869,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		local n,_, ico, _,_, d, e, _,_,_, id = UnitBuff(unit, i)
 		if id then
 			if self.Spells[id] then
-				local p = self:GetAuraPriority(n, id)
+				local p = self:GetAuraPriority(unit, n, id)
 				if p and p >= priority then
 					if p and (p > priority or (p == prio and expires and e < expires)) then
 						left = e - now
@@ -843,7 +888,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 	
 	local n, id, ico, d, e = self:GetInterruptFor(unit)
 	if n then
-		local p = self:GetAuraPriority(n, id)
+		local p = self:GetAuraPriority(unit, n, id)
 		if p and (p > priority or (p == prio and expires and e < expires)) then
 			left = e - now
 			duration = d
@@ -861,7 +906,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		local stanceId = self.stances[guid].stance
 		if stanceId and self.Spells[stanceId] then
 			n, _, ico = GetSpellInfo(stanceId)
-			local p = self:GetAuraPriority(n, stanceId)
+			local p = self:GetAuraPriority(unit, n, stanceId)
 			if p and p >= priority then
 				left = 0
 				duration = 0
