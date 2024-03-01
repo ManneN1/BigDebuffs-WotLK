@@ -13,5 +13,6 @@ embeds.xml
 
 locale\locale.xml
 BigDebuffs.xml
+BigDebuffs_Wrath.lua
 BigDebuffs.lua
 Options.lua
