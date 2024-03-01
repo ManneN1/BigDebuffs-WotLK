@@ -869,7 +869,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		if id then
 			if self.Spells[n] or self.Spells[id] then
 				local p = self:GetAuraPriority(unit, n, id)
-				if p and (p > priority or (p == prio and expires and e < expires)) then
+				if p and (p > priority or (p == priority and expires and e > expires)) then
 					left = e - now
 					duration = d
 					isAura = true
@@ -890,7 +890,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			if self.Spells[id] then
 				local p = self:GetAuraPriority(unit, n, id)
 				if p and p >= priority then
-					if p and (p > priority or (p == prio and expires and e < expires)) then
+					if p and (p > priority or (p == priority and expires and e > expires)) then
 						left = e - now
 						duration = d
 						isAura = true
@@ -908,7 +908,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 	local n, id, ico, d, e = self:GetInterruptFor(unit)
 	if n then
 		local p = self:GetAuraPriority(unit, n, id)
-		if p and (p > priority or (p == prio and expires and e < expires)) then
+		if p and (p > priority or (p == priority and expires and e > expires)) then
 			left = e - now
 			duration = d
 			isAura = true
