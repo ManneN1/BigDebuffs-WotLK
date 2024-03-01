@@ -45,7 +45,6 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
-				cdMod = 9,
                 cc = true,
                 interrupts = true,
                 immunities = true,
