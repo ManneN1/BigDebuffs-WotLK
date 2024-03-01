@@ -17,7 +17,6 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
-				cdMod = 9,
                 cc = true,
                 interrupts = false,
                 immunities = false,
@@ -31,7 +30,6 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
-				cdMod = 9,
                 cc = true,
                 interrupts = true,
                 immunities = true,
@@ -59,7 +57,6 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
-				cdMod = 9,
                 cc = true,
                 interrupts = true,
                 immunities = true,
@@ -73,7 +70,6 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
-				cdMod = 9,
                 cc = true,
                 interrupts = true,
                 immunities = true,
@@ -87,7 +83,6 @@ local defaults = {
 				enabled = true,
 				anchor = "auto",
 				size = 50,
-				cdMod = 9,
                 cc = true,
                 interrupts = true,
                 immunities = true,
@@ -468,7 +463,8 @@ function BigDebuffs:Refresh()
 		frame:Hide()
 		frame.current = nil
 		frame.cooldown.noCooldownCount = not self.db.profile.unitFrames.cooldownCount
-		self:AttachUnitFrame(unit)
+		frame.cooldownCircular.noCooldownCount = not self.db.profile.unitFrames.cooldownCount
+        self:AttachUnitFrame(unit)
 		self:UNIT_AURA(nil, unit)
 	end
 end
@@ -492,37 +488,35 @@ function BigDebuffs:AttachUnitFrame(unit)
 
 	local frame = self.UnitFrames[unit]
 	local frameName = "BigDebuffs" .. unit .. "UnitFrame"
-
-	if not frame then
+    
+    if not frame then
 		frame = CreateFrame("Button", frameName, UIParent, "BigDebuffsUnitFrameTemplate")
 		frame.icon = _G[frameName.."Icon"]
-		frame.cooldownContainer = CreateFrame("Button", frameName.."CooldownContainer", frame)
 		self.UnitFrames[unit] = frame
 		frame.icon:SetDrawLayer("BORDER")
-		frame.cooldownContainer:SetPoint("CENTER")
-		frame.cooldown:SetParent(frame.cooldownContainer)
+        frame.cooldown:SetParent(frame)
 		frame.cooldown:SetAllPoints()
-		frame.cooldown:SetAlpha(0.9)
-		
+        frame.cooldown:SetAlpha(0.9)
+        frame.cooldown:Hide()
+        
+        frame.cooldownCircular = CreateFrame("Frame", frameName.."CooldownCircular", frame, "CircleCooldownFrameTemplate")
+        frame.cooldownCircular:SetDrawBling(false)
+        
+        frame.cooldownCircular:SetParent(frame)
+        frame.cooldownCircular:SetAllPoints()
+        frame.cooldownCircular:SetAlpha(0.9)
+        
+        -- Needed for the circle cooldown to end up behind the unit frame level and borders
+        frame.cooldownCircular:SetFrameStrata("BACKGROUND")
+        
+        
+        frame.cooldownCircular:Hide()
+
 		frame:RegisterForDrag("LeftButton")
 		frame:SetMovable(true)
 		frame.unit = unit
-        
-        if Masque then
-            if not frame.masqueGroup then
-                local group = Masque:Group("BigDebuffs", unit:gsub('%d',''))
-                frame.masqueGroup = group
-                frame.masqueGroup:AddButton(frame,
-                    {
-                        Cooldown = frame.cooldown,
-                        Gloss = frame.icon,
-                        Icon = frame.icon,
-                    },
-                nil, true)
-            end
-        end
 	end
-
+    
 	frame:EnableMouse(self.test)
 
 	_G[frameName.."Name"]:SetText(self.test and not frame.anchor and unit)
@@ -553,19 +547,36 @@ function BigDebuffs:AttachUnitFrame(unit)
 			end		
 		end
 	end
+    
+    if Masque then
+        if frame.masqueGroup then
+            frame.masqueGroup:RemoveButton(frame)
+        end
+        
+        if not frame.anchor and not frame.blizzard then
+            local group = frame.masqueGroup and frame.masqueGroup or Masque:Group("BigDebuffs", unit:gsub('%d',''))
+            frame.masqueGroup = group
+            
+            frame.masqueGroup:AddButton(frame,
+                {
+                    Cooldown = frame.cooldown,
+                    Gloss = frame.icon,
+                    Icon = frame.icon,
+                },
+            nil, true)
+        end
+    end
 
 	if frame.anchor then
 		if frame.blizzard then
 			-- Blizzard Frame
 			frame:SetParent(frame.anchor:GetParent())
 			frame:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
-			frame.cooldownContainer:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel()-1)
-			frame.cooldownContainer:SetSize(frame.anchor:GetWidth() - config.cdMod, frame.anchor:GetHeight() - config.cdMod)
 			frame.anchor:SetDrawLayer("BACKGROUND")
+            frame.cooldownCircular:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
 		else
 			frame:SetParent(frame.parent and frame.parent or frame.anchor)
 			frame:SetFrameLevel(99)
-			frame.cooldownContainer:SetSize(frame.anchor:GetWidth(), frame.anchor:GetHeight())
 		end
 
 		frame:ClearAllPoints()
@@ -582,19 +593,13 @@ function BigDebuffs:AttachUnitFrame(unit)
 		else
 			frame:SetAllPoints(frame.anchor)
 		end
-        if Masque then
-            frame.masqueGroup:ReSkin()
-        end
+
 	else
 		-- Manual
 		frame:SetParent(UIParent)
 		frame:ClearAllPoints()
 		
-		frame.cooldownContainer:SetSize(frame:GetWidth(), frame:GetHeight())
-		
-		frame:SetFrameLevel(frame:GetParent():GetFrameLevel()+1)
-		frame.cooldownContainer:SetFrameLevel(frame:GetParent():GetFrameLevel())
-		frame.cooldownContainer:SetSize(frame:GetWidth(), frame:GetHeight())
+		frame:SetFrameLevel(frame:GetParent():GetFrameLevel())
 
 		if not self.db.profile.unitFrames[unit] then self.db.profile.unitFrames[unit] = {} end
 
@@ -608,10 +613,19 @@ function BigDebuffs:AttachUnitFrame(unit)
 		end
 		
 		frame:SetSize(config.size, config.size)
-        if Masque then
+	end
+    
+    
+    if frame.anchor and frame.blizzard then
+        if frame.cooldown:IsShown() then
+            frame.cooldown:Hide()
+        end
+    elseif frame.cooldownCircular:IsShown() then
+        if Masque and frame.masqueGroup then
             frame.masqueGroup:ReSkin()
         end
-	end
+        frame.cooldownCircular:Hide()
+    end
     
 end
 
@@ -635,7 +649,7 @@ local function UnitDebuffTest(unit, index)
 	local debuff = TestDebuffs[index]
 	if not debuff then return end
     
-    local duration = random(4, 50)
+    local duration = random(5, 10)
     
 	return GetSpellInfo(debuff[1]), nil, debuff[2], 0, "Magic", duration, GetTime()+duration, nil, nil, nil, debuff[1]
 end
@@ -648,6 +662,7 @@ function BigDebuffs:OnEnable()
 	self:RegisterEvent("UNIT_AURA")
 	self:RegisterEvent("COMBAT_LOG_EVENT_UNFILTERED")
 	self:RegisterEvent("UNIT_SPELLCAST_FAILED")
+    self:RegisterEvent("PARTY_MEMBERS_CHANGED")
 	self.interrupts = {}
 
 	-- Prevent OmniCC finish animations
@@ -669,6 +684,10 @@ function BigDebuffs:PLAYER_ENTERING_WORLD()
 		self:AttachUnitFrame(units[i])
 	end
 	self.stances = {}
+end
+
+function BigDebuffs:PARTY_MEMBERS_CHANGED()
+    self:Refresh()
 end
 
 -- For unit frames
@@ -704,11 +723,11 @@ end
 
 function BigDebuffs:UNIT_SPELLCAST_FAILED(_,unit, _, _, spellid)
 	local guid = UnitGUID(unit)
-	if self.interrupts[guid] == nil then
+	if not self.interrupts[guid] then
 		self.interrupts[guid] = {}
 		BigDebuffs:CancelTimer(self.interrupts[guid].timer)
-		self.interrupts[guid].timer = BigDebuffs:ScheduleTimer(self.ClearInterruptGUID, 30, self, guid)
-	end
+    end
+    self.interrupts[guid].timer = BigDebuffs:ScheduleTimer(self.ClearInterruptGUID, 30, self, guid)
 	self.interrupts[guid].failed = GetTime()
 end
 
@@ -717,7 +736,7 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 
     -- Stance logic
 	if subEvent == "SPELL_CAST_SUCCESS" and self.Spells[spellid] then
-		if spellid == 2457 or spellid == 2458 or spellid == 71 then
+		if spellid == 2457 or spellid == 2458 or spellid == 71 then -- Defensive/Berserker/Battle
 			self:UpdateStance(sourceGUID, spellid)
 		end
 	end
@@ -762,7 +781,7 @@ end
 
 function BigDebuffs:ClearStanceGUID(guid)
 	local unit = self:GetUnitFromGUID(guid)
-	if unit == nil then
+	if not unit or not self.stances[guid] then
 		self.stances[guid] = nil
 	else
 		self.stances[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
@@ -932,15 +951,25 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			end
 		end
 		
-		if duration > 1 then
-			frame.cooldown:SetCooldown(expires - duration, duration)
-			frame.cooldownContainer:Show()
-		else 
-			frame.cooldown:SetCooldown(0, 0)
-			frame.cooldownContainer:Hide()
+		if duration ~= nil then
+			if frame.anchor and frame.blizzard then
+                frame.cooldownCircular:SetCooldown(expires - duration, duration)
+            else
+                frame.cooldown:SetCooldown(expires - duration, duration)
+            end
+		else
+            if frame.anchor and frame.blizzard then
+                frame.cooldownCircular:SetCooldown(0, 0)
+                frame.cooldownCircular:Hide()
+            else
+                frame.cooldown:SetCooldown(0, 0)
+                frame.cooldown:Hide()
+            end
 		end
-
-		frame:Show()
+        
+        if not frame:IsShown() then
+            frame:Show()
+        end
 		frame.current = icon
 	else
 		-- Adapt
