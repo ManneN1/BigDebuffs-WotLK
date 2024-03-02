@@ -56,35 +56,56 @@ addon.Spells = {
 
     -- Other
 
+    [22734] = { type = BUFF_OTHER }, -- Drink
+        [46755] = { parent = 22734 }, -- Drink
+        [27089] = { parent = 22734 }, -- Drink
+        [43183] = { parent = 22734 }, -- Drink
+        [57073] = { parent = 22734 }, -- Drink
+        [43183] = { parent = 22734 }, -- WoTLK
+        [57073] = { parent = 22734 }, -- WoTLK
+        [61829] = { parent = 22734 }, -- Food 75
+        [61830] = { parent = 22734 }, -- Water 75
+        [61828] = { parent = 22734 }, -- Mage 75 Food
+        [58648] = { parent = 22734 }, -- Mage 80 Food
+    [34709] = { type = BUFF_OTHER },    -- Shadow Sight (Arena Stealth Eyes)
+    [23451] = { type = BUFF_OFFENSIVE }, -- Battleground Speed buff
+    [23493] = { type = BUFF_DEFENSIVE }, -- Battleground Heal buff
+    [23505] = { type = BUFF_OFFENSIVE }, -- Battleground Damage buff
+    
+    -- Engineering
+    
     [13099] = { type = ROOT }, -- Net-o-Matic
         [13119] = { parent = 13099 }, -- Net-o-Matic
         [13120] = { parent = 13099 }, -- Net-o-Matic
         [13138] = { parent = 13099 }, -- Net-o-Matic
         [13139] = { parent = 13099 }, -- Net-o-Matic
         [16566] = { parent = 13099 }, -- Net-o-Matic
-    [23723] = { type = BUFF_OFFENSIVE }, -- Mind Quickening Gem
-    [30456] = { type = BUFF_DEFENSIVE }, -- Nigh-Invulnerability
-    [30457] = { type = CROWD_CONTROL }, -- Complete Vulnerability
-    [33961] = { type = IMMUNITY_SPELL }, -- Spell Reflection (Sethekk Initiate)
-    [23451] = { type = BUFF_OFFENSIVE }, -- Battleground Speed buff
-    [23493] = { type = BUFF_DEFENSIVE }, -- Battleground Heal buff
-    [23505] = { type = BUFF_OFFENSIVE }, -- Battleground Damage buff
-    [6615] = { type = BUFF_OFFENSIVE }, -- Free Action Potion
-    [24364] = { type = BUFF_OFFENSIVE }, -- Living Action Potion
-    [3169] = { type = IMMUNITY }, -- Limited Invulnerability Potion
-    [16621] = { type = IMMUNITY }, -- Invulnerable Mail
-    [1090] = { type = CROWD_CONTROL }, -- Magic Dust
-    [13327] = { type = CROWD_CONTROL }, -- Reckless Charge
-    [835] = { type = CROWD_CONTROL }, -- Tidal Charm
-    [11359] = { type = BUFF_OFFENSIVE }, -- Restorative Potion
-    [5024] = { type = BUFF_OFFENSIVE }, -- Skull of Impending Doom
-    [2379] = { type = BUFF_OFFENSIVE }, -- Swiftness Potion
-    [5134] = { type = CROWD_CONTROL }, -- Flash Bomb
+    [19769] = { type = CROWD_CONTROL }, -- Thorium Grenade
+    [4068] = { type = CROWD_CONTROL }, -- Iron Grenade
+    [54758] = { type = BUFF_OTHER },    -- Hyperspeed Accelerators
+    [55379] = { type = BUFF_OTHER },    -- Skyflare Swiftness
+    [13141] = { type = BUFF_OFFENSIVE }, -- Gnomish Rocket Boots
+    [8892] = { type = BUFF_OFFENSIVE }, -- Goblin Rocket Boots
     [23097] = { type = BUFF_OFFENSIVE }, -- Fire Reflector
     [23131] = { type = BUFF_OFFENSIVE }, -- Frost Reflector
     [23132] = { type = BUFF_OFFENSIVE }, -- Shadow Reflector
-    [19769] = { type = CROWD_CONTROL }, -- Thorium Grenade
-    [4068] = { type = CROWD_CONTROL }, -- Iron Grenade
+    
+    -- Items (Trinkets, Potions, Weapon Effects and other items)
+    
+    -- Vanilla
+    
+    [30457] = { type = CROWD_CONTROL }, -- Complete Vulnerability
+    [6615] = { type = BUFF_OFFENSIVE }, -- Free Action Potion
+    [24364] = { type = BUFF_OFFENSIVE }, -- Living Action Potion
+    [2379] = { type = BUFF_OFFENSIVE }, -- Swiftness Potion
+    [3169] = { type = IMMUNITY }, -- Limited Invulnerability Potion
+    [11359] = { type = BUFF_OFFENSIVE }, -- Restorative Potion
+    [16621] = { type = IMMUNITY }, -- Invulnerable Mail
+    [23605] = { type = BUFF_OTHER }, -- Nightfall, Spell Vulnerability
+    [5134] = { type = CROWD_CONTROL }, -- Flash Bomb
+    [1090] = { type = CROWD_CONTROL }, -- Magic Dust
+    [13327] = { type = CROWD_CONTROL }, -- Reckless Charge
+    [835] = { type = CROWD_CONTROL }, -- Tidal Charm
     [23506] = { type = BUFF_DEFENSIVE }, -- Arena Grand Master trinket
     [29506] = { type = BUFF_DEFENSIVE }, -- Burrower's Shell trinket
     [12733] = { type = BUFF_OFFENSIVE }, -- Blacksmith trinket, Fear immunity
@@ -93,17 +114,51 @@ addon.Spells = {
     [13237] = { type = CROWD_CONTROL }, -- Goblin Mortar trinket
     [14253] = { type = BUFF_OFFENSIVE }, -- Black Husk Shield
     [9175] = { type = BUFF_OFFENSIVE }, -- Swift Boots
-    [13141] = { type = BUFF_OFFENSIVE }, -- Gnomish Rocket Boots
-    [8892] = { type = BUFF_OFFENSIVE }, -- Goblin Rocket Boots
     [9774] = { type = BUFF_OFFENSIVE }, -- Spider Belt & Ornate Mithril Boots
     [18798] = { type = CROWD_CONTROL }, -- Freezing Band
-    [22734] = { type = BUFF_OTHER }, -- Drink
-        [46755] = { parent = 22734 }, -- Drink
-        [27089] = { parent = 22734 }, -- Drink
-        [43183] = { parent = 22734 }, -- Drink
-        [57073] = { parent = 22734 }, -- Drink
-    [23605] = { type = BUFF_OTHER }, -- Nightfall, Spell Vulnerability
     [13494] = { type = BUFF_OFFENSIVE }, -- Manual Crowd Pummeler Haste buff
+    
+    -- TBC
+    
+    [23723] = { type = BUFF_OFFENSIVE }, -- Mind Quickening Gem
+    [30456] = { type = BUFF_DEFENSIVE }, -- Nigh-Invulnerability
+    [5024] = { type = BUFF_OFFENSIVE }, -- Skull of Impending Doom
+
+    -- WotLK
+    
+    [59626] = { type = BUFF_OTHER },    -- Black Magic
+    [65019] = { type = BUFF_OFFENSIVE }, -- Mjolnir Runestone
+    [71636] = { type = BUFF_OFFENSIVE }, -- Dislodged Foreign Object
+    [71605] = { type = BUFF_OFFENSIVE },  -- Siphoned Power
+    [71586] = { type = BUFF_OTHER },    -- Corroded Skeleton Key
+    [71635] = { type = BUFF_OTHER, }, -- Sindragosa Trinket
+        [71638] = { parent = 71635 }, -- Sindragosa Trinket, 277
+    [30249] = { type = BUFF_OTHER },    -- Hyper-Vision Goggles
+
+    -- PvE
+    
+    -- TBC
+    
+    [33961] = { type = IMMUNITY_SPELL }, -- Spell Reflection (Sethekk Initiate)
+    
+    -- WotLK
+    
+    -- [62589] = { type = IMMUNITY, }, -- Nature's Fury (Freya, Ancient Conservator)
+    [66770] = { type = IMMUNITY, }, -- Ferocious Butt (Icehowl)
+    [63276] = { type = IMMUNITY, }, -- Mark of the Faceless (General Vezax)
+	[71289] = { type = IMMUNITY }, -- Dominate Mind, Lady Deathwhisper
+    [71234] = { type = IMMUNITY }, -- Adherent's Determination,(Immune to Magical) adds on Lady Deathwhisper
+    [69674] = { type = IMMUNITY }, -- Mutated Infection, Rotface
+	[69290] = { type = IMMUNITY }, -- Blighted Spores, Festerguit
+    [69762] = { type = IMMUNITY }, -- Unchained Magic, Sindragosa
+    [28169] = { type = BUFF_OTHER }, -- Mutating Injection (Grobbulus)
+    [28059] = { type = BUFF_OTHER }, -- Positive Charge (Thaddius)
+    [28084] = { type = BUFF_OTHER }, -- Negative Charge (Thaddius)
+    [27819] = { type = BUFF_OTHER }, -- Detonate Mana (KT)
+    [63024] = { type = IMMUNITY }, -- Gravity Bomb (XT)
+    [63018] = { type = IMMUNITY }, -- Light Bomb (XT)
+    [65133] = { type = IMMUNITY }, -- Storm Cloud (Hodir)
+    [63571] = { type = IMMUNITY }, -- Nature's Fury (Freya)
 
     -- Interrupts
 
@@ -113,7 +168,6 @@ addon.Spells = {
     [13491] = { type = INTERRUPT, duration = 5 }, -- Iron Knuckles
     [16979] = { type = INTERRUPT, duration = 4 }, -- Feral Charge - Bear (Druid)
         [19675] = { parent = 16979 },  -- Feral Charge Effect (Druid)
-    
     [1766] = { type = INTERRUPT, duration = 5 }, -- Kick (Rogue)
         [1767] = { parent = 1766 },
         [1768] = { parent = 1766 },
