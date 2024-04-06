@@ -358,7 +358,17 @@ function BigDebuffs:AttachUnitFrame(unit)
 			frame:SetParent(frame.anchor:GetParent())
 			frame:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
 			frame.anchor:SetDrawLayer("BACKGROUND")
-            frame.cooldownCircular:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel())
+			frame.cooldownCircular:SetFrameLevel(frame.anchor:GetParent():GetFrameLevel() + 1)
+			local txtFrameName
+			for preName in string.gmatch(frame.anchor:GetName(),  "(.-)Portrait") do
+				txtFrameName = preName
+				break
+			end
+			txtFrameName = txtFrameName .. "TextureFrame"
+			if _G[txtFrameName] then
+				local txtFrame = _G[txtFrameName]
+				txtFrame:SetFrameLevel(frame.cooldownCircular:GetFrameLevel() + 2)
+			end
 		else
 			frame:SetParent(frame.parent and frame.parent or frame.anchor)
 			frame:SetFrameLevel(99)
