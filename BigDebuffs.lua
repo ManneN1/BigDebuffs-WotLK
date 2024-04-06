@@ -1,13 +1,10 @@
-local addonName, addon = ...
-
--- BigDebuffs by Jordon 
+-- BigDebuffs by Jordon
 -- Backported and general improvements by Konjunktur
 -- minor improvements by Apparent (initial stance logic)
 -- spell list from WotlK Classic (backported by Tsoukie and fixed by Konjunktur)
-
-BigDebuffs = LibStub("AceAddon-3.0"):NewAddon("BigDebuffs", "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0")
+local addonName, addon = ...
+BigDebuffs = LibStub("AceAddon-3.0"):NewAddon(addonName, "AceEvent-3.0", "AceHook-3.0", "AceTimer-3.0", "AceConsole-3.0")
 local Masque = LibStub("Masque", true)
-
 
 -- Defaults
 local defaults = {
@@ -225,7 +222,10 @@ local anchors = {
 }
 
 function BigDebuffs:OnInitialize()
-	self.db = LibStub("AceDB-3.0"):New("BigDebuffsDB", defaults, true)
+	self.db = LibStub("AceDB-3.0"):New(addonName.."DB", defaults, true)
+
+	self:RegisterChatCommand('bd', 'ParseParameters')
+	self:RegisterChatCommand(addonName, 'ParseParameters')
 
 	self.db.RegisterCallback(self, "OnProfileChanged", "Refresh")
 	self.db.RegisterCallback(self, "OnProfileCopied", "Refresh")
@@ -268,33 +268,34 @@ function BigDebuffs:AttachUnitFrame(unit)
 		unitsToUpdate[unit] = true
 		self:RegisterEvent("PLAYER_REGEN_ENABLED")
 		return 
+		return
 	end
 
 	local frame = self.UnitFrames[unit]
-	local frameName = "BigDebuffs" .. unit .. "UnitFrame"
-    
-    if not frame then
+	local frameName = addonName .. unit .. "UnitFrame"
+
+	if not frame then
 		frame = CreateFrame("Button", frameName, UIParent, "BigDebuffsUnitFrameTemplate")
 		frame.icon = _G[frameName.."Icon"]
 		self.UnitFrames[unit] = frame
 		frame.icon:SetDrawLayer("BORDER")
         frame.cooldown:SetParent(frame)
 		frame.cooldown:SetAllPoints()
-        frame.cooldown:SetAlpha(0.9)
-        frame.cooldown:Hide()
-        
-        frame.cooldownCircular = CreateFrame("Frame", frameName.."CooldownCircular", frame, "CircleCooldownFrameTemplate")
-        frame.cooldownCircular:SetDrawBling(false)
-        
-        frame.cooldownCircular:SetParent(frame)
-        frame.cooldownCircular:SetAllPoints()
-        frame.cooldownCircular:SetAlpha(0.9)
-        
-        -- Needed for the circle cooldown to end up behind the unit frame level and borders
-        frame.cooldownCircular:SetFrameStrata("BACKGROUND")
-        
-        
-        frame.cooldownCircular:Hide()
+		frame.cooldown:SetAlpha(0.9)
+		frame.cooldown:Hide()
+
+		frame.cooldownCircular = CreateFrame("Frame", frameName.."CooldownCircular", frame, "CircleCooldownFrameTemplate")
+		frame.cooldownCircular:SetDrawBling(false)
+		frame.cooldownCircular:SetDrawSwipe(true)
+		frame.cooldownCircular:SetReverse(true)
+		frame.cooldownCircular:SetParent(frame)
+		frame.cooldownCircular:SetAllPoints()
+		frame.cooldownCircular:SetAlpha(0.9)
+		frame.cooldownCircular:Hide()
+
+		-- Needed for the circle cooldown to end up behind the unit frame level and borders
+		frame.cooldownCircular:SetFrameStrata("BACKGROUND")
+
 
 		frame:RegisterForDrag("LeftButton")
 		frame:SetMovable(true)
@@ -432,9 +433,9 @@ end
 local function UnitDebuffTest(unit, index)
 	local debuff = TestDebuffs[index]
 	if not debuff then return end
-    
-    local duration = random(5, 10)
-    
+
+	local duration = random(5, 20)
+
 	return GetSpellInfo(debuff[1]), nil, debuff[2], 0, "Magic", duration, GetTime()+duration, nil, nil, nil, debuff[1]
 end
 
@@ -451,10 +452,11 @@ function BigDebuffs:OnEnable()
 
 	-- Prevent OmniCC finish animations
 	if OmniCC then
-		self:RawHook(OmniCC, "TriggerEffect", function(object, cooldown)
+		self:RawHook(OmniCC, "TriggerEffect", function(...)
+			local _, cooldown = ...
 			local name = cooldown:GetName()
-			if name and name:find("BigDebuffs") then return end
-			self.hooks[OmniCC].TriggerEffect(object, cooldown)
+			if name and name:find(addonName) then return end
+			self.hooks[OmniCC].TriggerEffect(...)
 		end, true)
 	end
 
@@ -510,15 +512,15 @@ function BigDebuffs:UNIT_SPELLCAST_FAILED(_,unit, _, _, spellid)
 	if not self.interrupts[guid] then
 		self.interrupts[guid] = {}
 		BigDebuffs:CancelTimer(self.interrupts[guid].timer)
-    end
-    self.interrupts[guid].timer = BigDebuffs:ScheduleTimer(self.ClearInterruptGUID, 30, self, guid)
+	end
+	self.interrupts[guid].timer = self:ScheduleTimer(function(...)self:ClearInterruptGUID(...)end, 30, guid)
 	self.interrupts[guid].failed = GetTime()
 end
 
 function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 	local _, subEvent, sourceGUID, _, _, destGUID, destName, _, spellid, name = ...
 
-    -- Stance logic
+	-- Stance logic
 	if subEvent == "SPELL_CAST_SUCCESS" and self.Spells[spellid] then
 		if spellid == 2457 or spellid == 2458 or spellid == 71 then -- Defensive/Berserker/Battle
 			self:UpdateStance(sourceGUID, spellid)
@@ -539,11 +541,11 @@ function BigDebuffs:COMBAT_LOG_EVENT_UNFILTERED(_, ...)
 		return
 	end
 	
+
 	local spelldata = self.Spells[name] and self.Spells[name] or self.Spells[spellid]
 	if spelldata == nil or spelldata.type ~= "interrupts" then return end
 	local duration = spelldata.duration
-   	if not duration then return end
-	
+	if not duration then return end
 	self:UpdateInterrupt(nil, destGUID, spellid, duration)
 end
 
@@ -555,7 +557,7 @@ function BigDebuffs:UpdateStance(guid, spellid)
 	end
 	
 	self.stances[guid].stance = spellid
-	self.stances[guid].timer = self:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
+	self.stances[guid].timer = self:ScheduleTimer(function(...)self:ClearStanceGUID(...)end, 180, guid)
 
 	local unit = self:GetUnitFromGUID(guid)
 
@@ -569,7 +571,7 @@ function BigDebuffs:ClearStanceGUID(guid)
 	if not unit or not self.stances[guid] then
 		self.stances[guid] = nil
 	else
-		self.stances[guid].timer = BigDebuffs:ScheduleTimer(self.ClearStanceGUID, 180, self, guid)
+		self.stances[guid].timer = self:ScheduleTimer(function(...)self:ClearStanceGUID(...)end, 180, guid)
 	end
 end
 
@@ -579,7 +581,7 @@ function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
 	if spellid and duration ~= nil then
 		if self.interrupts[guid] == nil then self.interrupts[guid] = {} end
 		BigDebuffs:CancelTimer(self.interrupts[guid].timer)
-		self.interrupts[guid].timer = BigDebuffs:ScheduleTimer(self.ClearInterruptGUID, 30, self, guid)
+		self.interrupts[guid].timer = BigDebuffs:ScheduleTimer(function(...)self:ClearInterruptGUID(...)end, 30, guid)
 		self.interrupts[guid][spellid] = {started = t, duration = duration}
 	-- old interrupt expiring
 	elseif spellid and duration == nil then
@@ -596,7 +598,7 @@ function BigDebuffs:UpdateInterrupt(unit, guid, spellid, duration)
 	end
 	-- clears the interrupt after end of duration
 	if duration then
-		BigDebuffs:ScheduleTimer(self.UpdateInterrupt, duration+0.1, self, unit, guid, spellid)
+		self:ScheduleTimer(function(arg1) self:UpdateInterrupt(unpack(arg1)) end, duration+0.1, {unit, guid, spellid})
 	end
 end
 
@@ -634,9 +636,9 @@ function BigDebuffs:GetInterruptFor(unit)
 end
 
 function BigDebuffs:UNIT_AURA(event, unit)
-	if not self.db.profile.unitFrames[unit:gsub("%d", "")] or 
-			not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled then 
-		return 
+	if not unit or not self.db.profile.unitFrames[unit:gsub("%d", "")] or
+			not self.db.profile.unitFrames[unit:gsub("%d", "")].enabled then
+		return
 	end
 	
 	local frame = self.UnitFrames[unit]
@@ -668,6 +670,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 		end
 	end
 	
+
 	for i = 1, 40 do
 		-- Check buffs
 		local n,_, ico, _,_, d, e, _,_,_, id = UnitBuff(unit, i)
@@ -721,7 +724,7 @@ function BigDebuffs:UNIT_AURA(event, unit)
 			end
 		end
 	end
-	
+
 	if isAura then
 		if frame.current ~= icon then
 			if frame.blizzard then
@@ -735,8 +738,8 @@ function BigDebuffs:UNIT_AURA(event, unit)
 				frame.icon:SetTexture(icon)
 			end
 		end
-		
-		if duration ~= nil then
+
+		if duration then
 			if frame.anchor and frame.blizzard then
                 frame.cooldownCircular:SetCooldown(expires - duration, duration)
             else
@@ -779,8 +782,6 @@ function BigDebuffs:UNIT_PET()
 	self:UNIT_AURA(nil, "pet")
 end
 
-SLASH_BigDebuffs1 = "/bd"
-SLASH_BigDebuffs2 = "/bigdebuffs"
-SlashCmdList.BigDebuffs = function(msg)
-	LibStub("AceConfigDialog-3.0"):Open("BigDebuffs")
+function BigDebuffs:ParseParameters()
+	LibStub("AceConfigDialog-3.0"):Open(addonName)
 end

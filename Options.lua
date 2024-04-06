@@ -1,5 +1,6 @@
-local BigDebuffs = LibStub("AceAddon-3.0"):GetAddon("BigDebuffs")
-local L = LibStub("AceLocale-3.0"):GetLocale("BigDebuffs")
+local addonName = ...
+local BigDebuffs = LibStub("AceAddon-3.0"):GetAddon(addonName)
+local L = LibStub("AceLocale-3.0"):GetLocale(addonName)
 
 local order = {
 	immunities = 1,
@@ -125,13 +126,13 @@ function BigDebuffs:SetupOptions()
 			vers = {
 				order = 1,
 				type = "description",
-				name = "|cffffd700"..L["Version"].."|r "..GetAddOnMetadata("BigDebuffs", "Version").."\n",
+				name = "|cffffd700"..L["Version"].."|r "..GetAddOnMetadata(addonName, "Version").."\n",
 				cmdHidden = true
 			},
 			desc = {
 				order = 2,
 				type = "description",
-				name = "|cffffd700 "..L["Author"].."|r Jordon (WoTLK backport by Konjunktur) \n",
+				name = "|cffffd700 "..L["Author"].."|r "..GetAddOnMetadata(addonName, "Author").."\n",
 				cmdHidden = true
 			},
 			test = {
@@ -894,8 +895,8 @@ function BigDebuffs:SetupOptions()
 	self.options.plugins.profiles = { profiles = LibStub("AceDBOptions-3.0"):GetOptionsTable(self.db) }
 	
 	local LibDualSpec = LibStub('LibDualSpec-1.0')
-	LibDualSpec:EnhanceDatabase(self.db, "BigDebuffsDB")
+	LibDualSpec:EnhanceDatabase(self.db, addonName.."DB")
 	LibDualSpec:EnhanceOptions(self.options.plugins.profiles.profiles, self.db)
 
-	LibStub("AceConfig-3.0"):RegisterOptionsTable("BigDebuffs", self.options)
+	LibStub("AceConfig-3.0"):RegisterOptionsTable(addonName, self.options)
 end

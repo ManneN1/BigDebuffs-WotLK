@@ -1,6 +1,6 @@
 ## Interface: 33500
 ## Title: BigDebuffs
-## Notes: Increases the debuff size of crowd control effects on the Blizzard raid frames
+## Notes: Tracks auras on unitframe portraits
 ## Version: v6.4
 ## Author: Jordon (WoTLK backport by Konjunktur)
 ## DefaultState: Enabled
