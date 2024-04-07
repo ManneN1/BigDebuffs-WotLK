@@ -23,9 +23,12 @@ The backport now supports fully rounded corners by implementing **[CircleCooldow
  I'd like to thank the following people for their contributions to this release:
 > [Jordon][3] for the base addon, as developed throughout MoP-BfA (and possibly further).
 
-> [Jakeswork][4] for his completion of the WotLK aura list, minor bug fixes and the Warrior stance logic addition.
+> [Jakeswork][4] for minor bug fixes and the Warrior stance logic addition.
+
+> [Tsoukie][5] for structural improvements (and potentially also raid frame support, in the future).
 
 [1]: https://github.com/bkader/Masque-WoTLK
 [2]: https://github.com/RomanSpector/CircleCooldownTemplate
 [3]: https://github.com/jordonwow
 [4]: https://github.com/jakeswork
+[5]: https://gitlabs.com/tsoukie
