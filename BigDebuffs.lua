@@ -497,6 +497,11 @@ function BigDebuffs:GetAuraPriority(unit, name, id)
 
     id = self.Spells[id] and id or name
 
+    -- Handle child spellIDs/names
+    if self.Spells[id].parent then
+        id = self.Spells[id].parent
+    end
+
     -- Make sure category is enabled
     if not self.db.profile.unitFrames[unit:gsub("%d", "")][self.Spells[id].type] then return end
 
